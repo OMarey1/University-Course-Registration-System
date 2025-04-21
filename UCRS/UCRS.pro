@@ -9,23 +9,35 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    admin.cpp \
     adminpage.cpp \
+    banner.cpp \
     ccpage.cpp \
     cmpage.cpp \
+    course.cpp \
     crpage.cpp \
     dashboard.cpp \
+    instructor.cpp \
     main.cpp \
     loginpage.cpp \
-    reportspage.cpp
+    reportspage.cpp \
+    student.cpp \
+    user.cpp
 
 HEADERS += \
+    admin.h \
     adminpage.h \
+    banner.h \
     ccpage.h \
     cmpage.h \
+    course.h \
     crpage.h \
     dashboard.h \
+    instructor.h \
     loginpage.h \
-    reportspage.h
+    reportspage.h \
+    student.h \
+    user.h
 
 FORMS += \
     adminpage.ui \
