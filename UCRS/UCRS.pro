@@ -10,7 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     admin.cpp \
-    adminpage.cpp \
+    admindashboard.cpp \
     banner.cpp \
     ccpage.cpp \
     cmpage.cpp \
@@ -26,7 +26,7 @@ SOURCES += \
 
 HEADERS += \
     admin.h \
-    adminpage.h \
+    admindashboard.h \
     banner.h \
     ccpage.h \
     cmpage.h \
@@ -40,7 +40,7 @@ HEADERS += \
     user.h
 
 FORMS += \
-    adminpage.ui \
+    admindashboard.ui \
     ccpage.ui \
     cmpage.ui \
     crpage.ui \
@@ -52,3 +52,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc

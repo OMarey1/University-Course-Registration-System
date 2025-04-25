@@ -6,7 +6,7 @@
 class Student : public User
 {
 public:
-    Student();
+    Student(const QString& n, const QString& uname, const QString& pass, UserRole r):  User(n, uname, pass, r){};
 };
 
 #endif // STUDENT_H

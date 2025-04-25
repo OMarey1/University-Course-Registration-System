@@ -1,10 +1,32 @@
 #ifndef BANNER_H
 #define BANNER_H
 
+#include "user.h"
+#include "course.h"
+#include <map>
+using namespace std;
+
 class Banner
 {
+private:
+    map<QString, User*> users;
+    map<QString, Course*> courses;
+    User* thisUser;
+    bool isAdmin;
 public:
     Banner();
+    bool login(const QString& uname, const QString& pass);
+    void logout();
+    bool addUser(User* user);
+    bool deleteUser(const QString& username);
+    vector<User*> listUsers();
+    bool createCourse(Course* course);
+    bool deleteCourse (const QString& id);
+    // Course* searchCourse();
+    bool generateReport();
+    bool loadFromFile(const QString& filename );
+    bool saveToFile(const QString& filename );
+
 };
 
 #endif // BANNER_H

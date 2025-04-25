@@ -1,3 +1,3 @@
 #include "instructor.h"
 
-Instructor::Instructor() {}
+// Instructor::Instructor() {}

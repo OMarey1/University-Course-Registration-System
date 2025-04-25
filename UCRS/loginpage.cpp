@@ -12,3 +12,9 @@ LoginPage::~LoginPage()
 {
     delete ui;
 }
+
+void LoginPage::on_loginButton_clicked()
+{
+
+}
+
