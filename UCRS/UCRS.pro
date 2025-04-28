@@ -35,6 +35,7 @@ HEADERS += \
     dashboard.h \
     instructor.h \
     loginpage.h \
+    messages.h \
     reportspage.h \
     student.h \
     user.h

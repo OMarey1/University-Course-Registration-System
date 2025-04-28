@@ -4,6 +4,7 @@
 #include "user.h"
 #include "course.h"
 #include <map>
+
 using namespace std;
 
 class Banner
@@ -13,9 +14,15 @@ private:
     map<QString, Course*> courses;
     User* thisUser;
     bool isAdmin;
+
+    bool saveUsersData();
+    bool loadUsersData();
+    bool saveCoursesData();
+    bool loadCoursesData();
 public:
     Banner();
-    bool login(const QString& uname, const QString& pass);
+    ~Banner();
+    int login(const QString& uname, const QString& pass);
     void logout();
     bool addUser(User* user);
     bool deleteUser(const QString& username);
@@ -24,9 +31,8 @@ public:
     bool deleteCourse (const QString& id);
     // Course* searchCourse();
     bool generateReport();
-    bool loadFromFile(const QString& filename );
-    bool saveToFile(const QString& filename );
-
+    bool loadData();
+    bool saveData();
 };
 
 #endif // BANNER_H

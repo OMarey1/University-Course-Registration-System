@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "banner.h"
+#include "messages.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,12 +18,14 @@ class LoginPage : public QMainWindow
 public:
     LoginPage(QWidget *parent = nullptr);
     ~LoginPage();
+    void setBanner(Banner* b);
 
 private slots:
     void on_loginButton_clicked();
 
 private:
     Ui::LoginPage *ui;
+    Banner* banner;
     QString username;
     QString password;
 };
