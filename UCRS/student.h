@@ -19,7 +19,7 @@ public:
     int getStudentID() const;
     void setStudentID(int ID);
     bool registerCourse(Course* course);
-    bool dorpCourse(Course* course);
+    bool dropCourse(Course* course);
     vector<Course*> getCourses() const;
 
     ~Student();
