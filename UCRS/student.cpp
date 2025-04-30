@@ -16,7 +16,7 @@ bool Student::registerCourse(Course*course){
         return false;
     }
     for (size_t i = 0; i < registeredCourses.size(); i++){
-        if(registeredCourses[i] == course){
+        if(registeredCourses.at(i) == course){
             return false;
         }
     }
@@ -28,8 +28,8 @@ bool Student::dropCourse(Course*course){
         return false;
     }
     for(size_t i = 0; i < registeredCourses.size();i++){
-        if(registeredCourses[i] == course) {
-            registeredCourses[i] = registeredCourses.back();
+        if(registeredCourses.at(i) == course) {
+            registeredCourses.at(i) = registeredCourses.back();
             registeredCourses.pop_back();
             return true;
         }
