@@ -1,6 +1,11 @@
 #ifndef ADMINDASHBOARD_H
 #define ADMINDASHBOARD_H
 
+#include "banner.h"
+#include "admin.h"
+#include "student.h"
+#include "instructor.h"
+#include "messages.h"
 #include <QDialog>
 
 namespace Ui {
@@ -14,9 +19,20 @@ class AdminDashboard : public QDialog
 public:
     explicit AdminDashboard(QWidget *parent = nullptr);
     ~AdminDashboard();
+    void setBanner(Banner* b);
+    void fillUsersTable();
+
+private slots:
+    void on_logoutButton_clicked();
+
+    void on_reloadTableButton_clicked();
+
+    void on_addUserButton_clicked();
 
 private:
     Ui::AdminDashboard *ui;
+    Banner* banner;
+    Admin* admin;
 };
 
 #endif // ADMINDASHBOARD_H

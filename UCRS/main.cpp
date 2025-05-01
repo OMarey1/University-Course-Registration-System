@@ -1,14 +1,14 @@
 #include "loginpage.h"
-#include "admindashboard.h"
-
+#include "banner.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    Banner banner;
     LoginPage w;
+    w.setBanner(&banner);
     w.show();
-    AdminDashboard ad;
-    ad.show();
     return a.exec();
 }

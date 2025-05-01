@@ -12,3 +12,8 @@ Dashboard::~Dashboard()
 {
     delete ui;
 }
+
+void Dashboard::setBanner(Banner *b)
+{
+    banner = b;
+}

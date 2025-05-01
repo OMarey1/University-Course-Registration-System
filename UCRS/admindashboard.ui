@@ -426,6 +426,7 @@ QHeaderView::section {
                 <font>
                  <family>Century Gothic</family>
                  <pointsize>10</pointsize>
+                 <kerning>false</kerning>
                 </font>
                </property>
                <property name="cursor">
@@ -448,12 +449,12 @@ QHeaderView::section {
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>Edit User</string>
+                <string>Edit / Delete User</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="deleteUserButton">
+              <widget class="QPushButton" name="reloadTableButton">
                <property name="font">
                 <font>
                  <family>Century Gothic</family>
@@ -464,7 +465,7 @@ QHeaderView::section {
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>Delete User</string>
+                <string>Reload Table</string>
                </property>
               </widget>
              </item>
@@ -487,7 +488,7 @@ QHeaderView::section {
               <number>120</number>
              </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>170</number>
+              <number>200</number>
              </attribute>
              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
               <bool>true</bool>

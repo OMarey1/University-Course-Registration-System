@@ -3,30 +3,36 @@
 #include "student.h"
 #include "instructor.h"
 #include <fstream>
+#include <QDebug>
 
 bool Banner::saveUsersData()
 {
-    ofstream file("users.csv");
+    ofstream file("users.txt");
 
     if (!file.is_open()){
         return false;
     }
 
     // Header
-    file << "Name\tUsername\tPassword\tRole\tID\tCourses Number\tCourses IDs\n";
+    file << "Name Username Password Role ID Courses Number Courses IDs\n";
 
     for (auto& user: users) {
-        file << user.second->getName().toStdString() << "\t"
-             << user.second->getUsername().toStdString() << "\t"
-             << user.second->getPassword().toStdString() << "\t"
-             << user.second->getRole() << "\t";
+        file << user.second->getName().toStdString() << " "
+             << user.second->getUsername().toStdString() << " "
+             << user.second->getPassword().toStdString() << " "
+             << user.second->getRole() << " "
+             << user.second->getID().toStdString() << " ";
+        vector<Course*> userCourses;
+        if (user.second->getRole() == STUDENT) {
+            userCourses = dynamic_cast<Student*>(user.second)->getCourses();
+        } else if (user.second->getRole() == INSTRUCTOR) {
+            userCourses = dynamic_cast<Instructor*>(user.second)->getCourses();
+        }
         if (user.second->getRole() != ADMIN) {
-            file << user.second->getID() << "\t";
-            vector<Course*> userCourses = user.second->getCourses();
-            file << userCourses.size() << "\t" ;
-            for (auto& course: userCourses) {
-                // file << course.getID() << " ";
-            }
+            file << userCourses.size() << " " ;
+            // for (auto& course: userCourses) {
+            // file << course.getID() << " ";
+            // }
         }
         file << endl;
     }
@@ -41,7 +47,7 @@ bool Banner::loadUsersData()
     vector<Course*> userCourses;
     User *loadedUser;
 
-    ifstream file("users.csv");
+    ifstream file("users.txt");
 
     if (!file.is_open()){
         return false;
@@ -59,23 +65,45 @@ bool Banner::loadUsersData()
             for (int i = 0; i < coursesNum; ++i) {
                 string courseId;
                 file >> courseId;
-                userCourses.push_back(courses.at(QString::fromStdString(courseId)));
+                try {
+                    userCourses.push_back(courses.at(QString::fromStdString(courseId)));
+                } catch (const std::out_of_range&) {
+                    qDebug() << "Missing course:" << courseId;
+                    return false;
+                }
+
             }
             if (role == STUDENT) {
                 loadedUser = new Student(QString::fromStdString(name),QString::fromStdString(username),QString::fromStdString(password),QString::fromStdString(id), userCourses);
             } else if (role == INSTRUCTOR) {
                 loadedUser = new Instructor(QString::fromStdString(name),QString::fromStdString(username),QString::fromStdString(password),QString::fromStdString(id), userCourses);
             }
+        } else {
+            loadedUser = new Admin(QString::fromStdString(name),QString::fromStdString(username),QString::fromStdString(password),QString::fromStdString(id));
         }
+        users[QString::fromStdString(username)] = loadedUser;
     }
 
+    if(users.empty()) {
+        return false;
+    }
     return true;
 }
 
 Banner::Banner() {
     thisUser = nullptr;
     isAdmin = false;
-    loadData();
+    // User* adminUser = new Admin("Omar", "admin", "admin123");
+    // users[adminUser->getUsername()] = adminUser;
+    // qDebug() << users["admin"];
+    // saveData();
+    // loadData();
+    if (!loadData()) {
+        // default admin
+        Admin* adminUser = new Admin("Omar", "admin", "admin123", "900158261");
+        users[adminUser->getUsername()] = adminUser;
+        // saveData();
+    }
 }
 
 Banner::~Banner()
@@ -87,21 +115,32 @@ Banner::~Banner()
     for (auto& c : courses) delete c.second;
 }
 
+User *Banner::getCurrentUser()
+{
+    return thisUser;
+}
+
 int Banner::login(const QString &uname, const QString &pass)
 {
     try {
-        // thisUser = users.at(uname.toStdString());
+        thisUser = users.at(uname);
+        // qDebug() << thisUser;
+        // qDebug() << thisUser->getPassword();
+        // qDebug() << pass;
         if (thisUser->getPassword() == pass) {
             if (thisUser->getRole() == ADMIN) {
                 isAdmin = true;
                 // Admin
+                // qDebug() << "Admin";
                 return 1;
             } else {
                 // Student or Instructor
+                // qDebug() << "Student or Instructor";
                 return 2;
             }
         } else {
             // Wrong Password
+            // qDebug() << "Wrong Password";
             return 0;
         }
     } catch (const std::out_of_range & e) {
@@ -110,13 +149,59 @@ int Banner::login(const QString &uname, const QString &pass)
     }
 }
 
+void Banner::logout()
+{
+    thisUser=nullptr;
+    isAdmin=false;
+}
+
+bool Banner::addUser(User *user)
+{
+    if(users[user->getUsername()]) {
+        return false;
+    } else {
+        users[user->getUsername()] = user;
+        return true;
+    }
+}
+
+// vector<User *> Banner::listUsers()
+// {
+//     qDebug() << users.size();
+//     vector<User*> usersList;
+//     usersList.resize(users.size());
+//     for(const auto& u: users) {
+//         usersList.push_back(u.second);
+//     }
+//     return usersList;
+// }
+
+map<QString, User*> Banner::listUsers() {
+    return users;
+}
+
 bool Banner::loadData()
 {
-    // loadCoursesData();
-    loadUsersData();
+    // if (loadCoursesData()){
+    if (loadUsersData()){
+        return true;
+    } else {
+        return false;
+    }
+    // } else {
+    // return false;
+    // }
 }
 
 bool Banner::saveData()
 {
-    saveUsersData();
+    // if (saveCoursesData()){
+    if (saveUsersData()){
+        return true;
+    } else {
+        return false;
+    }
+    // } else {
+    // return false;
+    // }
 }

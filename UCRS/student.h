@@ -9,12 +9,10 @@ using namespace std;
 class Student : public User
 {
 private:
-    QString id;
     vector<Course*> registeredCourses;
 public:
-    Student(const QString& n, const QString& uname, const QString& pass, const QString& id, vector<Course*> courses):  User(n, uname, pass, STUDENT){this->id; this->registeredCourses = courses;};
-    int getID() override {/*return id;*/}
-    vector<Course*> getCourses() override {/*return courses;*/}
+    Student(const QString& n, const QString& uname, const QString& pass, const QString& id, vector<Course*> courses):  User(n, uname, pass, id, STUDENT){this->registeredCourses = courses;};
+    vector<Course*> getCourses() {return registeredCourses;}
 };
 
 #endif // STUDENT_H

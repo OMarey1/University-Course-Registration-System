@@ -2,16 +2,15 @@
 #define INSTRUCTOR_H
 
 #include "user.h"
+#include "course.h"
 
 class Instructor : public User
 {
 private:
-    QString id;
     vector<Course*> assignedCourses;
 public:
-    Instructor(const QString& n, const QString& uname, const QString& pass, const QString& id, vector<Course*> courses):  User(n, uname, pass, INSTRUCTOR){this->id; this->assignedCourses = courses;};
-    int getID() override {/*return id;*/}
-    vector<Course*> getCourses() override {/*return courses;*/}
+    Instructor(const QString& n, const QString& uname, const QString& pass, const QString& id, vector<Course*> courses):  User(n, uname, pass, id, INSTRUCTOR){this->assignedCourses = courses;};
+    vector<Course*> getCourses() {return assignedCourses;}
 };
 
 #endif // INSTRUCTOR_H

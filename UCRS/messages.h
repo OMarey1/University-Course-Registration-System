@@ -11,7 +11,7 @@ inline void showSuccess(QWidget* parent, const QString& message) {
     QMessageBox::information(parent, "Success", message);
 }
 
-inline bool co0nfirmAction(QWidget* parent, const QString& action) {
+inline bool confirmAction(QWidget* parent, const QString& action) {
     return QMessageBox::question(parent, "Confirm Action", action, QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
 }
 

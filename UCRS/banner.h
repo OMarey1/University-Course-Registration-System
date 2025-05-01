@@ -17,20 +17,22 @@ private:
 
     bool saveUsersData();
     bool loadUsersData();
-    bool saveCoursesData();
-    bool loadCoursesData();
+    // bool saveCoursesData();
+    // bool loadCoursesData();
 public:
     Banner();
     ~Banner();
+    User* getCurrentUser();
     int login(const QString& uname, const QString& pass);
     void logout();
     bool addUser(User* user);
-    bool deleteUser(const QString& username);
-    vector<User*> listUsers();
-    bool createCourse(Course* course);
-    bool deleteCourse (const QString& id);
-    // Course* searchCourse();
-    bool generateReport();
+    // bool deleteUser(const QString& username);
+    // vector<User*> listUsers();
+    map<QString, User*> listUsers();
+    // bool createCourse(Course course);
+    // bool deleteCourse (const QString& id);
+    // Course searchCourse();
+    // bool generateReport();
     bool loadData();
     bool saveData();
 };
