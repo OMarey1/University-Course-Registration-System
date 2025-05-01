@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
-    <height>596</height>
+    <width>503</width>
+    <height>404</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>503</width>
+    <height>404</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>503</width>
+    <height>404</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -21,10 +33,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>40</y>
-     <width>551</width>
-     <height>521</height>
+     <x>0</x>
+     <y>0</y>
+     <width>501</width>
+     <height>401</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">

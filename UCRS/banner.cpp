@@ -165,6 +165,20 @@ bool Banner::addUser(User *user)
     }
 }
 
+bool Banner::deleteUser(const QString &username)
+{
+    User* user;
+    try {
+        if(users.at(username)){
+            users.erase(username);
+            return true;
+        }
+    } catch (const std::out_of_range & e) {
+        // Username is not registered;
+        return false;
+    }
+}
+
 // vector<User *> Banner::listUsers()
 // {
 //     qDebug() << users.size();

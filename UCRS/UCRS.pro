@@ -18,6 +18,7 @@ SOURCES += \
     crpage.cpp \
     cupage.cpp \
     dashboard.cpp \
+    eupage.cpp \
     instructor.cpp \
     main.cpp \
     loginpage.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     crpage.h \
     cupage.h \
     dashboard.h \
+    eupage.h \
     instructor.h \
     loginpage.h \
     messages.h \
@@ -49,6 +51,7 @@ FORMS += \
     crpage.ui \
     cupage.ui \
     dashboard.ui \
+    eupage.ui \
     loginpage.ui \
     reportspage.ui
 
