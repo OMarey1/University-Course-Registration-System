@@ -1,10 +1,9 @@
-#include "reportspage.h"  // Change this line
 #include <QApplication>
-
+#include "crpage.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ReportsPage w;  // Change this line
+    CRPage w;  // Change this line
     w.show();
     return a.exec();
 }
