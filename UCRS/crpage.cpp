@@ -2,11 +2,12 @@
 #include "ui_crpage.h"
 
 CRPage::CRPage(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::CRPage)
+    : QDialog(parent),
+    ui(new Ui::CRPage)
 {
     ui->setupUi(this);
 }
+
 
 CRPage::~CRPage()
 {

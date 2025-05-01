@@ -15,6 +15,7 @@ public:
     explicit ReportsPage(QWidget *parent = nullptr);
     ~ReportsPage();
 
+
 private:
     Ui::ReportsPage *ui;
 };

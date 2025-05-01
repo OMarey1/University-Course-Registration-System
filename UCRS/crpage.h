@@ -2,7 +2,6 @@
 #define CRPAGE_H
 
 #include <QDialog>
-
 namespace Ui {
 class CRPage;
 }
