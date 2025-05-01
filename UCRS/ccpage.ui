@@ -15,6 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #000080;
+</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
