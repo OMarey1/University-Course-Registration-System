@@ -1,19 +1,14 @@
 #include "instructor.h"
-#include "Course.h"
+#include "course.h"
 #include <vector>
 
-Instructor::Instructor() : instructorID(0) {};
-Instructor::Instructor(int ID)
+QString Instructor::getInstructorID() const
 {
-    instructorID = ID;
+    return id;
 }
-int Instructor::getInstructorID() const
+void Instructor::setInstructorID(QString id)
 {
-    return instructorID;
-}
-void Instructor::setInstructorID(int id)
-{
-    instructorID = id;
+    id = id;
 }
 bool Instructor::addCourse(Course *course)
 {

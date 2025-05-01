@@ -1,14 +1,16 @@
+#pragma once
 #ifndef COURSE_H
 #define COURSE_H
 
-#include "student.h"
 #include <string>
 #include <vector>
 #include <queue>
 
 using namespace std;
 
-class Student; // Forward declaration
+class Student;
+class Instructor;
+
 class Course {
 private:
     string courseID;

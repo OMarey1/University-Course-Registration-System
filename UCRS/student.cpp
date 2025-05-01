@@ -1,17 +1,15 @@
 #include "student.h"
-#include "Course.h"
+#include "course.h"
 #include <vector>
 using namespace std;
 
-Student::Student() : studentID(0) {};
-Student::Student(int ID) : studentID(ID) {};
-int Student::getStudentID() const
+QString Student::getStudentID() const
 {
-    return studentID;
+    return id;
 }
-void Student::setStudentID(int ID)
+void Student::setStudentID(QString ID)
 {
-    studentID = ID;
+   id = ID;
 }
 bool Student::registerCourse(Course *course)
 {

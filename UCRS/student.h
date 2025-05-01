@@ -1,10 +1,12 @@
+#pragma once
 #ifndef STUDENT_H
 #define STUDENT_H
 
 #include "user.h"
-#include "course.h"
 #include <vector>
 using namespace std;
+
+class Course;
 
 class Student : public User
 {
@@ -13,8 +15,8 @@ private:
 
 public:
     Student(const QString &n, const QString &uname, const QString &pass, const QString &id, vector<Course *> courses) : User(n, uname, pass, id, STUDENT) { this->registeredCourses = courses; };
-    int getStudentID() const;
-    void setStudentID(int ID);
+    QString getStudentID() const;
+    void setStudentID(QString ID);
     bool registerCourse(Course *course);
     bool dropCourse(Course *course);
     vector<Course *> getCourses() const;

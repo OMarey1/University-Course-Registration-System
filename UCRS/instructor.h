@@ -2,7 +2,8 @@
 #define INSTRUCTOR_H
 
 #include "user.h"
-#include "course.h"
+
+class Course;
 
 class Instructor : public User
 {
@@ -11,8 +12,8 @@ private:
 
 public:
     Instructor(const QString &n, const QString &uname, const QString &pass, const QString &id, vector<Course *> courses) : User(n, uname, pass, id, INSTRUCTOR) { this->assignedCourses = courses; };
-    int getInstructorID() const;
-    void setInstructorID(int id);
+    QString getInstructorID() const;
+    void setInstructorID(QString id);
     bool addCourse(Course *course);
     bool removeCourse(Course *course);
     vector<Course *> getCourses() const;
