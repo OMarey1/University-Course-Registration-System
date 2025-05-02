@@ -1,5 +1,8 @@
 #include "admindashboard.h"
 #include "ui_admindashboard.h"
+#include "student.h"
+#include "instructor.h"
+#include "messages.h"
 #include "cupage.h"
 #include "eupage.h"
 
@@ -9,7 +12,6 @@ AdminDashboard::AdminDashboard(QWidget *parent)
     banner(nullptr)
 {
     ui->setupUi(this);
-    setAttribute(Qt::WA_QuitOnClose);
 }
 
 AdminDashboard::~AdminDashboard()
@@ -21,6 +23,7 @@ void AdminDashboard::setBanner(Banner *b)
 {
     banner = b;
     admin = dynamic_cast<Admin*>(banner->getCurrentUser());
+    ui->welcomeLabel->setText("Welcome, " + admin->getName());
     fillUsersTable();
 }
 

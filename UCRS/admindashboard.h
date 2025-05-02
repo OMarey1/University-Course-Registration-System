@@ -3,9 +3,6 @@
 
 #include "banner.h"
 #include "admin.h"
-#include "student.h"
-#include "instructor.h"
-#include "messages.h"
 #include <QDialog>
 
 namespace Ui {
