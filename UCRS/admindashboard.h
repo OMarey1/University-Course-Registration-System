@@ -29,6 +29,10 @@ private slots:
 
     void on_addUserButton_clicked();
 
+    void on_editUserButton_clicked();
+
+    void on_saveButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     Banner* banner;

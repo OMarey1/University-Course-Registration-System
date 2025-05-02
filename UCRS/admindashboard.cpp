@@ -1,6 +1,7 @@
 #include "admindashboard.h"
 #include "ui_admindashboard.h"
 #include "cupage.h"
+#include "eupage.h"
 
 AdminDashboard::AdminDashboard(QWidget *parent)
     : QDialog(parent)
@@ -88,5 +89,19 @@ void AdminDashboard::on_addUserButton_clicked()
     cupage* cu = new cupage(this);
     cu->setBanner(banner);
     cu->show();
+}
+
+
+void AdminDashboard::on_editUserButton_clicked()
+{
+    eupage* eu = new eupage(this);
+    eu->setBanner(banner);
+    eu->show();
+}
+
+
+void AdminDashboard::on_saveButton_clicked()
+{
+    banner->saveData();
 }
 

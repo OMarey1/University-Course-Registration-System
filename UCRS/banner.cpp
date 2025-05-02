@@ -12,7 +12,9 @@ bool Banner::saveUsersData()
     if (!file.is_open()){
         return false;
     }
-
+    // Write Rows Count At the Top of the file to fix the Loading issue casues by file.eof()
+    int rowsCount = users.size();
+    file << rowsCount << endl;
     // Header
     file << "Name Username Password Role ID Courses Number Courses IDs\n";
 
@@ -53,14 +55,29 @@ bool Banner::loadUsersData()
         return false;
     }
 
+    int rowsCount;
+    file >> rowsCount;
+    qDebug() << rowsCount;
+
     string header;
     getline(file, header);
+    string skipHeadaer;
+    for(int i=0; i<9; i++) {
+        file >> skipHeadaer;
+        // qDebug() << headerFake;
+    }
 
-    while (!file.eof()) {
-        file >> name >> username >> password >> role;
+    int row = 0;
+    while (row != rowsCount) {
+        userCourses.clear();
+        file >> name >> username >> password >> role >> id;
+        // qDebug() << name;
+        // qDebug() << username;
+        // qDebug() << password;
+        // qDebug() << role;
         role = (UserRole) role;
         if (role != ADMIN){
-            file >> id >> coursesNum;
+            file >> coursesNum;
             // Because of this I have to load the Courses from the file before loading the users
             for (int i = 0; i < coursesNum; ++i) {
                 string courseId;
@@ -82,6 +99,7 @@ bool Banner::loadUsersData()
             loadedUser = new Admin(QString::fromStdString(name),QString::fromStdString(username),QString::fromStdString(password),QString::fromStdString(id));
         }
         users[QString::fromStdString(username)] = loadedUser;
+        row++;
     }
 
     if(users.empty()) {

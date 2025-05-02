@@ -15,6 +15,11 @@ eupage::~eupage()
     delete ui;
 }
 
+void eupage::setBanner(Banner *b)
+{
+    banner = b;
+}
+
 
 void eupage::on_deleteButton_clicked()
 {
