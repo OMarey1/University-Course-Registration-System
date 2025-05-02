@@ -29,6 +29,7 @@ public:
     bool deleteUser(const QString& username);
     // vector<User*> listUsers();
     map<QString, User*> listUsers();
+    bool validatePassword(const QString& pass);
     // bool createCourse(Course course);
     // bool deleteCourse (const QString& id);
     // Course searchCourse();

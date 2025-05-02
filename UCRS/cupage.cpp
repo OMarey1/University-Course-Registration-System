@@ -26,6 +26,12 @@ void cupage::on_createUserButton_clicked()
     }
 
     User* newUser = nullptr;
+
+    if(!banner->validatePassword(password)){
+        showError(this, "Password is not valid!\nEnsure passwords consist of 8 characters and numbers.");
+        return;
+    }
+
     switch (role) {
     case ADMIN:
         newUser = new Admin(name, username, password, id);

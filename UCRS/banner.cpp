@@ -185,7 +185,6 @@ bool Banner::addUser(User *user)
 
 bool Banner::deleteUser(const QString &username)
 {
-    User* user;
     try {
         if(users.at(username)){
             users.erase(username);
@@ -195,6 +194,7 @@ bool Banner::deleteUser(const QString &username)
         // Username is not registered;
         return false;
     }
+    return false; // Check if Correct Later
 }
 
 // vector<User *> Banner::listUsers()
@@ -210,6 +210,20 @@ bool Banner::deleteUser(const QString &username)
 
 map<QString, User*> Banner::listUsers() {
     return users;
+}
+
+bool Banner::validatePassword(const QString &pass)
+{
+    if (pass.length() != 8) {
+        return false;
+    }
+
+    for (const QChar c: pass){
+        if (!isalnum(c.toLatin1())){
+            return false;
+        }
+    }
+    return true;
 }
 
 bool Banner::loadData()

@@ -9,6 +9,7 @@ AdminDashboard::AdminDashboard(QWidget *parent)
     banner(nullptr)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_QuitOnClose);
 }
 
 AdminDashboard::~AdminDashboard()
@@ -55,7 +56,8 @@ void AdminDashboard::fillUsersTable()
         ui->userTableWidget->setItem(row, 0, new QTableWidgetItem(user->getID()));
         ui->userTableWidget->setItem(row, 1, new QTableWidgetItem(user->getName()));
         ui->userTableWidget->setItem(row, 2, new QTableWidgetItem(user->getUsername()));
-        ui->userTableWidget->setItem(row, 3, new QTableWidgetItem(admin->validatePassword(user->getPassword()) ? "Valid" : "Not Valid"));
+        // ui->userTableWidget->setItem(row, 3, new QTableWidgetItem(admin->validatePassword(user->getPassword()) ? "Valid" : "Not Valid"));
+         ui->userTableWidget->setItem(row, 3, new QTableWidgetItem(banner->validatePassword(user->getPassword()) ? "Valid" : "Not Valid"));
         QString roleText;
         if(u.second->getRole() == ADMIN){
             roleText = "Admin";
