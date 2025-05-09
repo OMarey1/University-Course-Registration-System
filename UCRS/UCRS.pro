@@ -9,51 +9,51 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    admin.cpp \
-    admindashboard.cpp \
-    banner.cpp \
-    ccpage.cpp \
-    cmpage.cpp \
-    course.cpp \
-    crpage.cpp \
-    cupage.cpp \
-    dashboard.cpp \
-    eupage.cpp \
-    instructor.cpp \
-    main.cpp \
-    loginpage.cpp \
-    reportspage.cpp \
-    student.cpp \
-    user.cpp
+   Sources\admin.cpp \
+    Sources\admindashboard.cpp \
+    Sources\banner.cpp \
+    Sources\ccpage.cpp \
+    Sources\cmpage.cpp \
+    Sources\course.cpp \
+    Sources\crpage.cpp \
+    Sources\cupage.cpp \
+    Sources\dashboard.cpp \
+    Sources\eupage.cpp \
+    Sources\instructor.cpp \
+    Sources\main.cpp \
+    Sources\loginpage.cpp \
+    Sources\reportspage.cpp \
+    Sources\student.cpp \
+    Sources\user.cpp
 
 HEADERS += \
-    admin.h \
-    admindashboard.h \
-    banner.h \
-    ccpage.h \
-    cmpage.h \
-    course.h \
-    crpage.h \
-    cupage.h \
-    dashboard.h \
-    eupage.h \
-    instructor.h \
-    loginpage.h \
-    messages.h \
-    reportspage.h \
-    student.h \
-    user.h
+    Headers\admin.h \
+    Headers\admindashboard.h \
+    Headers\banner.h \
+    Headers\ccpage.h \
+    Headers\cmpage.h \
+    Headers\course.h \
+    Headers\crpage.h \
+    Headers\cupage.h \
+    Headers\dashboard.h \
+    Headers\eupage.h \
+    Headers\instructor.h \
+    Headers\loginpage.h \
+    Headers\messages.h \
+    Headers\reportspage.h \
+    Headers\student.h \
+    Headers\user.h
 
 FORMS += \
-    admindashboard.ui \
-    ccpage.ui \
-    cmpage.ui \
-    crpage.ui \
-    cupage.ui \
-    dashboard.ui \
-    eupage.ui \
-    loginpage.ui \
-    reportspage.ui
+    Forms\admindashboard.ui \
+    Forms\ccpage.ui \
+    Forms\cmpage.ui \
+    Forms\crpage.ui \
+    Forms\cupage.ui \
+    Forms\dashboard.ui \
+    Forms\eupage.ui \
+    Forms\loginpage.ui \
+    Forms\reportspage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

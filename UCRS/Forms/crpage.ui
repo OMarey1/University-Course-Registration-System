@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRPage</class>
+ <widget class="QWidget" name="CRPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Course Registration System</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="titleLabel">
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+    font-size: 24px;
+    font-weight: bold;
+    color: #2E4053;
+    padding: 12px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #D6EAF8, stop:1 #AED6F1);
+    border-radius: 8px;
+</string>
+     </property>
+     <property name="text">
+      <string>Course Registration</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="studentInfoLayout">
+     <item>
+      <widget class="QLabel" name="studentNameLabel">
+       <property name="styleSheet">
+        <string notr="true">
+    font-size: 14px;
+    color: #34495E;
+    padding: 2px 4px;
+</string>
+       </property>
+       <property name="text">
+        <string>Student Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="studentNameLineEdit">
+       <property name="styleSheet">
+        <string notr="true">
+    font-size: 14px;
+    padding: 6px;
+    border: 1px solid #BFC9CA;
+    border-radius: 5px;
+    background: #FDFEFE;
+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="studentIdLabel">
+       <property name="styleSheet">
+        <string notr="true">
+    font-size: 14px;
+    color: #34495E;
+    padding: 2px 4px;
+</string>
+       </property>
+       <property name="text">
+        <string>Student ID:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="studentIdLineEdit">
+       <property name="styleSheet">
+        <string notr="true">
+    font-size: 14px;
+    padding: 6px;
+    border: 1px solid #BFC9CA;
+    border-radius: 5px;
+    background: #FDFEFE;
+</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="coursesLayout">
+     <item>
+      <layout class="QVBoxLayout" name="availableCoursesLayout">
+       <item>
+        <widget class="QLabel" name="availableCoursesLabel">
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+    font-size: 16px;
+    font-weight: bold;
+    color: #2874A6;
+    padding: 4px;
+    background: #EBF5FB;
+    border-radius: 6px;
+</string>
+         </property>
+         <property name="text">
+          <string>Available Courses</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="availableCoursesListWidget">
+         <property name="styleSheet">
+          <string notr="true">
+    background: #F8F9F9;
+    border: 1px solid #BFC9CA;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px;
+    selection-background-color: #AED6F1;
+    selection-color: #154360;
+</string>
+         </property>
+         <property name="dragEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::DragDropMode::DragDrop</enum>
+         </property>
+         <property name="defaultDropAction">
+          <enum>Qt::DropAction::MoveAction</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="buttonsLayout">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="registerButton">
+         <property name="styleSheet">
+          <string notr="true">
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #2874A6;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    margin: 6px 0;
+
+
+    background-color: #1B4F72;
+
+</string>
+         </property>
+         <property name="text">
+          <string>Register &gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="dropButton">
+         <property name="styleSheet">
+          <string notr="true">
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #2874A6;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    margin: 6px 0;
+
+
+    background-color: #1B4F72;
+
+</string>
+         </property>
+         <property name="text">
+          <string>&lt; Drop</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="registeredCoursesLayout">
+       <item>
+        <widget class="QLabel" name="registeredCoursesLabel">
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+    font-size: 16px;
+    font-weight: bold;
+    color: #2874A6;
+    padding: 4px;
+    background: #EBF5FB;
+    border-radius: 6px;
+</string>
+         </property>
+         <property name="text">
+          <string>Registered Courses</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="registeredCoursesListWidget">
+         <property name="styleSheet">
+          <string notr="true">
+    background: #F8F9F9;
+    border: 1px solid #BFC9CA;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px;
+    selection-background-color: #AED6F1;
+    selection-color: #154360;
+</string>
+         </property>
+         <property name="dragEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::DragDropMode::DragDrop</enum>
+         </property>
+         <property name="defaultDropAction">
+          <enum>Qt::DropAction::MoveAction</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="waitingListLayout">
+     <item>
+      <widget class="QLabel" name="waitingListLabel">
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+    font-size: 16px;
+    font-weight: bold;
+    color: #2874A6;
+    padding: 4px;
+    background: #EBF5FB;
+    border-radius: 6px;
+</string>
+       </property>
+       <property name="text">
+        <string>Waiting List</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="waitingListWidget">
+       <property name="styleSheet">
+        <string notr="true">
+    background: #FEF9E7;
+    border: 1px solid #F7DC6F;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px;
+    selection-background-color: #F9E79F;
+    selection-color: #7D6608;
+</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="errorLabel">
+     <property name="styleSheet">
+      <string notr="true">
+    color: #C0392B;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px;
+    border-radius: 5px;
+
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
