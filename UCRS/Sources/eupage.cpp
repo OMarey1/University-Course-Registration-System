@@ -23,17 +23,21 @@ void eupage::setBanner(Banner *b)
 
 void eupage::on_deleteButton_clicked()
 {
-    username =ui->usernamelineEdit->text();
+    username = ui->usernamelineEdit->text();
     if(username == "") {
         showError(this, "You have to fill all the inputs fileds");
         return;
     }
 
-    if(banner->deleteUser(username)) {
+    int status = banner->deleteUser(username);
+
+    if(status == 1) {
         showSuccess(this, "User has been deleted!");
         this->close();
-    } else {
+    } else if (status == 0) {
         showError(this, "Entered username is not found!");
+    } else if (status == -1) {
+        showError(this, "Cannot delete the current admin!");
     }
 }
 

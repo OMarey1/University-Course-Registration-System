@@ -183,18 +183,22 @@ bool Banner::addUser(User *user)
     }
 }
 
-bool Banner::deleteUser(const QString &username)
+int Banner::deleteUser(const QString &username)
 {
     try {
         if(users.at(username)){
+            if (thisUser->getUsername() == username){
+                throw invalid_argument("Cannot delete the current admin!");
+            }
             users.erase(username);
-            return true;
+            return 1;
         }
-    } catch (const std::out_of_range & e) {
+    } catch (const out_of_range & e) {
         // Username is not registered;
-        return false;
+        return 0;
+    } catch (const invalid_argument& e) {
+        return -1;
     }
-    return false; // Check if Correct Later
 }
 
 // vector<User *> Banner::listUsers()
