@@ -315,6 +315,11 @@ QLineEdit {
     font-size: 16px;
     margin: 5px;
 }
+
+QLineEdit:disabled  {
+	    background-color: #222;
+}
+
 QLineEdit:focus {
     border: 2px solid #19A2E1;
     background-color: #002852;
@@ -334,6 +339,11 @@ QPushButton {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+QPushButton:disabled {
+	    background-color: #222;
+}
+
 QPushButton:hover {
     background-color: #19A2E1;
     /*transform: translateY(-1px)*/;
@@ -356,6 +366,15 @@ QPushButton:pressed {
     margin-bottom: 30px;
     letter-spacing: 0.5px;
 }
+
+#pageTitleLable {
+    font-size: 22px;
+    font-weight: bold;
+    color: #19A2E1;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
 #loginBox {
     background-color: #001829;
     border-radius: 20px;

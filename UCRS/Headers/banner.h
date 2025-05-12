@@ -27,6 +27,8 @@ public:
     void logout();
     bool addUser(User* user);
     int deleteUser(const QString& username);
+    bool updateUser(const QString& username, const QString& name, const QString& pass, const QString& id);
+    User* search(const QString& username);
     // vector<User*> listUsers();
     map<QString, User*> listUsers();
     bool validatePassword(const QString& pass);

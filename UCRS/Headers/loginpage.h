@@ -23,6 +23,9 @@ public:
 private slots:
     void on_loginButton_clicked();
 
+    void onChildDialogClosed(int result);
+
+
 private:
     Ui::LoginPage *ui;
     Banner* banner;

@@ -92,21 +92,40 @@ void AdminDashboard::on_reloadTableButton_clicked()
 void AdminDashboard::on_addUserButton_clicked()
 {
     cupage* cu = new cupage(this);
+    cu->setModal(true);
+    // connect the dialog’s finished() to your slot
+    connect(cu, &QDialog::finished, this, &AdminDashboard::onChildDialogClosed);
     cu->setBanner(banner);
     cu->show();
+    cu->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 
 void AdminDashboard::on_editUserButton_clicked()
 {
     eupage* eu = new eupage(this);
+    eu->setModal(true);
+    // connect the dialog’s finished() to your slot
+    connect(eu, &QDialog::finished, this, &AdminDashboard::onChildDialogClosed);
     eu->setBanner(banner);
     eu->show();
+    eu->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 
 void AdminDashboard::on_saveButton_clicked()
 {
     banner->saveData();
+}
+
+void AdminDashboard::onChildDialogClosed(int result)
+{
+    // if (result == QDialog::Accepted) {
+    //     user clicked “OK” (or dlg->accept())
+    // } else {
+    //     user clicked “Cancel” or closed the window
+    // }
+    fillUsersTable();
+    // fillCoursesTable();
 }
 

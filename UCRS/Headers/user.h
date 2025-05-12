@@ -23,6 +23,7 @@ public:
     QString getPassword() const {return password;}
     UserRole getRole() const {return role;}
     QString getID() {return id;}
+    void update(const QString& n, const QString& pass, const QString& id);
 };
 
 #endif // USER_H

@@ -34,14 +34,24 @@ void LoginPage::on_loginButton_clicked()
     showSuccess(this, (result == 1) ? "Admin Logged in" : "User Logged in");
     if (result == 1) {
         AdminDashboard* ad = new AdminDashboard(this);
+        connect(ad, &QDialog::finished, this, &LoginPage::onChildDialogClosed,
+                Qt::QueuedConnection);
         ad->setBanner(banner);
-        this->close();
         ad->show();
+        this->close();
+        ad->setAttribute(Qt::WA_DeleteOnClose);
     } else {
         // open regular Dashboard
         Dashboard* d = new Dashboard(this);
+        connect(d, &QDialog::finished, this, &LoginPage::onChildDialogClosed);
         d->setBanner(banner);
-        this->close();
         d->show();
+        d->setAttribute(Qt::WA_DeleteOnClose);
     }
+}
+
+void LoginPage::onChildDialogClosed(int result)
+{
+    this->show();
+    // this->close();
 }

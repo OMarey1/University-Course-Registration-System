@@ -21,6 +21,8 @@ public:
 private slots:
     void on_createUserButton_clicked();
 
+    void on_clearButton_clicked();
+
 private:
     Ui::cupage *ui;
     Banner* banner;

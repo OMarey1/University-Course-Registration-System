@@ -186,18 +186,39 @@ bool Banner::addUser(User *user)
 int Banner::deleteUser(const QString &username)
 {
     try {
-        if(users.at(username)){
-            if (thisUser->getUsername() == username){
-                throw invalid_argument("Cannot delete the current admin!");
-            }
-            users.erase(username);
-            return 1;
+        if (thisUser->getUsername() == username){
+            throw invalid_argument("Cannot delete the current admin!");
+        }
+        users.erase(username);
+        return 1;
+    } catch (const invalid_argument& e) {
+        return 0;
+    }
+}
+
+bool Banner::updateUser(const QString &username, const QString &name, const QString &pass, const QString &id)
+{
+    try {
+        if (users.at(username)){
+            users[username]->update(name,pass,id);
+            return true;
         }
     } catch (const out_of_range & e) {
-        // Username is not registered;
-        return 0;
-    } catch (const invalid_argument& e) {
-        return -1;
+        // Username is not found;
+        return false;
+    }
+    catch (...) {
+        return false;
+    }
+}
+
+User *Banner::search(const QString &username)
+{
+    try {
+        return users.at(username);
+    } catch (const out_of_range & e) {
+        // Username is not found;
+        return nullptr;
     }
 }
 

@@ -24,9 +24,9 @@ void cupage::setBanner(Banner *b)
 
 void cupage::on_createUserButton_clicked()
 {
-
     if (!isInputsFilled()){
-        showError(this, "You have to fill all the inputs fileds");
+        showError(this, "You have to fill all the inputs fields");
+        return;
     }
 
     User* newUser = nullptr;
@@ -47,7 +47,6 @@ void cupage::on_createUserButton_clicked()
         newUser = new Instructor(name, username, password, id, std::vector<Course*>{});
         break;
     }
-
     if (banner->addUser(newUser)) {
         showSuccess(this, "New user has been created!");
         this->close();
@@ -84,4 +83,14 @@ bool cupage::isInputsFilled()
     return true;
 }
 
+
+
+void cupage::on_clearButton_clicked()
+{
+    ui->namelineEdit->setText("");
+    ui->usernamelineEdit->setText("");
+    ui->passwordlineEdit->setText("");
+    ui->idlineEdit->setText("");
+    ui->rolecomboBox->setCurrentIndex(0);
+}
 

@@ -21,10 +21,26 @@ private slots:
 
     void on_deleteButton_clicked();
 
+    void on_searchButton_clicked();
+
+    void on_cancelButton_clicked();
+
+    void on_clearButton_clicked();
+
+    void on_updateButton_clicked();
+
 private:
     Ui::eupage *ui;
     Banner* banner;
+    QString name;
     QString username;
+    QString password;
+    QString id;
+    // UserRole role;
+    User* user;
+
+    void setEditState(bool state);
+    bool isInputsFilled();
 };
 
 #endif // EUPAGE_H
