@@ -37,6 +37,7 @@ public:
     string getDepartment() const;
     vector<Student*> getEnrolledStudents() const;
     queue<Student*> getWaitingList() const;
+    int getEnrolledStudentsNumber() const;
     
     // Course operations
     bool enrollStudent(Student* student);

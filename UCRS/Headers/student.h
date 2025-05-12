@@ -10,9 +10,6 @@ class Course;
 
 class Student : public User
 {
-private:
-    vector<Course *> registeredCourses;
-
 public:
     Student(const QString &n, const QString &uname, const QString &pass, const QString &id, vector<Course *> courses) : User(n, uname, pass, id, STUDENT) { this->registeredCourses = courses; };
     QString getStudentID() const;
@@ -20,6 +17,7 @@ public:
     bool registerCourse(Course *course);
     bool dropCourse(Course *course);
     vector<Course *> getCourses() const;
+    vector<Course *> registeredCourses;
 
     ~Student();
 };

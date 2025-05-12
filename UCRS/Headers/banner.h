@@ -12,6 +12,7 @@ class Banner
 private:
     map<QString, User*> users;
     map<QString, Course*> courses;
+    map<QString,Instructor*> instructors;
     User* thisUser;
     bool isAdmin;
 
@@ -29,7 +30,9 @@ public:
     bool deleteUser(const QString& username);
     // vector<User*> listUsers();
     map<QString, User*> listUsers();
+    map<QString, Course*> listCourses(); // added a map for courses
     bool validatePassword(const QString& pass);
+    map<QString, Instructor*> listInstructors();
     // bool createCourse(Course course);
     // bool deleteCourse (const QString& id);
     // Course searchCourse();

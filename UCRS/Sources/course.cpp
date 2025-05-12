@@ -1,4 +1,4 @@
-#include "../Headers/course.h"
+    #include "../Headers/course.h"
 #include "../Headers/student.h"
 #include "../Headers/instructor.h"
 #include <algorithm>
@@ -28,6 +28,12 @@ string Course::getDepartment() const { return department; }
 vector<Student*> Course::getEnrolledStudents() const { return enrolledStudents; }
 
 queue<Student*> Course::getWaitingList() const { return waitingList; }
+
+int Course::getEnrolledStudentsNumber()const
+{
+    return static_cast<int>(enrolledStudents.size());
+
+}
 
 bool Course::enrollStudent(Student* student) {
     // Check if already enrolled
