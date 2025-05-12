@@ -61,7 +61,7 @@ void ReportsPage::on_generatePushButton_clicked()
                 ui->reportWidget->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(course->getScheduleTime())));
                 row++;
             }
-
+            ui->reportWidget->resizeColumnsToContents();
         }
         else if(selectedReport == "Course Enrollment")
         {
@@ -83,6 +83,8 @@ void ReportsPage::on_generatePushButton_clicked()
                 ui->reportWidget->setItem(row, 6, new QTableWidgetItem(QString::number(course->getCapacity())));
                 row++;
             }
+            ui->reportWidget->resizeColumnsToContents();
+
         }
        else if(selectedReport == "Instructor Workload")
         {
@@ -119,7 +121,7 @@ void ReportsPage::on_generatePushButton_clicked()
                     row++;
                 }
             }
-
+            ui->reportWidget->resizeColumnsToContents();
         }
 }
 void ReportsPage::on_exportPushButton_clicked()
@@ -182,7 +184,7 @@ void ReportsPage::on_exportPushButton_clicked()
             if((separator == "," && (cell.contains(',')))|| cell.contains("\""))
             {
                 cell.replace("\"","\"\\");
-                cell = "\"" + cell+ "\"\\";
+                cell = "\"" + cell+ "\"";
             }
             rowData<<cell;
         }
