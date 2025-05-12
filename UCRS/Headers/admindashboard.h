@@ -32,6 +32,8 @@ private slots:
 
     void onChildDialogClosed(int result);
 
+    void on_addCourseButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     Banner* banner;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>462</height>
+    <width>817</width>
+    <height>614</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <rect>
      <x>100</x>
      <y>150</y>
-     <width>501</width>
+     <width>631</width>
      <height>101</height>
     </rect>
    </property>
@@ -70,7 +70,7 @@
     <rect>
      <x>100</x>
      <y>260</y>
-     <width>231</width>
+     <width>251</width>
      <height>51</height>
     </rect>
    </property>
@@ -148,9 +148,9 @@
   <widget class="QTableWidget" name="WaitingList">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>350</y>
-     <width>201</width>
+     <x>280</x>
+     <y>430</y>
+     <width>261</width>
      <height>101</height>
     </rect>
    </property>
@@ -168,8 +168,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>320</y>
+     <x>330</x>
+     <y>400</y>
      <width>131</width>
      <height>16</height>
     </rect>

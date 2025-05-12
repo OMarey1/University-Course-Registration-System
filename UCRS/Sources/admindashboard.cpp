@@ -5,6 +5,7 @@
 #include "../Headers/messages.h"
 #include "../Headers/cupage.h"
 #include "../Headers/eupage.h"
+#include "../Headers/ccpage.h"
 
 AdminDashboard::AdminDashboard(QWidget *parent)
     : QDialog(parent)
@@ -113,6 +114,17 @@ void AdminDashboard::on_editUserButton_clicked()
 }
 
 
+void AdminDashboard::on_addCourseButton_clicked()
+{
+    CCPage* cc = new CCPage(this);
+    cc->setModal(true);
+    // connect the dialog’s finished() to your slot
+    connect(cc, &QDialog::finished, this, &AdminDashboard::onChildDialogClosed);
+    // cc->setBanner(banner);
+    cc->show();
+    cc->setAttribute(Qt::WA_DeleteOnClose);
+}
+
 void AdminDashboard::on_saveButton_clicked()
 {
     banner->saveData();
@@ -128,4 +140,5 @@ void AdminDashboard::onChildDialogClosed(int result)
     fillUsersTable();
     // fillCoursesTable();
 }
+
 

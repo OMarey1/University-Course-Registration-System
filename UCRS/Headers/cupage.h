@@ -32,6 +32,7 @@ private:
     QString id;
     UserRole role;
 
+
     bool isInputsFilled();
 };
 

@@ -2,7 +2,7 @@
 #ifndef COURSE_H
 #define COURSE_H
 
-#include <string>
+#include <QString>
 #include <vector>
 #include <queue>
 
@@ -13,28 +13,28 @@ class Instructor;
 
 class Course {
 private:
-    string courseID;
-    string courseName;
+    QString courseID;
+    QString courseName;
     unsigned int creditHours;
     Instructor* instructor;
     unsigned int capacity;
-    string scheduleTime;
-    string department;
+    QString scheduleTime;
+    QString department;
     vector<Student*> enrolledStudents;
     queue<Student*> waitingList;
 public:
-    Course(const string& id, const string& name, unsigned int credits,
-           Instructor* instructor, unsigned int cap, const string& time,
-           const string& dept);
+    Course(const QString& id, const QString& name, unsigned int credits,
+           Instructor* instructor, unsigned int cap, const QString& time,
+           const QString& dept);
     
     // Getters
-    string getCourseID() const;
-    string getCourseName() const;
+    QString getCourseID() const;
+    QString getCourseName() const;
     unsigned int getCreditHours() const;
     Instructor* getInstructor() const;
     unsigned int getCapacity() const;
-    string getScheduleTime() const;
-    string getDepartment() const;
+    QString getScheduleTime() const;
+    QString getDepartment() const;
     vector<Student*> getEnrolledStudents() const;
     queue<Student*> getWaitingList() const;
     

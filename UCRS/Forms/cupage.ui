@@ -31,9 +31,13 @@
    <string>UCRS - Create User Page</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#nameLabel, #usernameLabel, #passwordLabel,#idLabel,#roleLabel{
+   <string notr="true">QLabel{
 	font-size: 16px;
 	font-weight: bold;
+}
+
+#pageTitleLabel {
+		font-size: 20px;
 }</string>
   </property>
   <widget class="QWidget" name="centralWidget" native="true">
@@ -68,7 +72,7 @@
      <widget class="QWidget" name="verticalWidget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLabel" name="pageTitleLable">
+        <widget class="QLabel" name="pageTitleLabel">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -78,6 +82,7 @@
          <property name="font">
           <font>
            <family>Century Gothic</family>
+           <pointsize>-1</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -247,7 +252,7 @@
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
-            <string>Create User</string>
+            <string>Create</string>
            </property>
           </widget>
          </item>

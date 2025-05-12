@@ -16,7 +16,7 @@ bool Banner::saveUsersData()
     int rowsCount = users.size();
     file << rowsCount << endl;
     // Header
-    file << "Name Username Password Role ID Courses Number Courses IDs\n";
+    file << "Name Username Password Role ID Courses_Number Courses_IDs\n";
 
     for (auto& user: users) {
         file << user.second->getName().toStdString() << " "
@@ -57,24 +57,24 @@ bool Banner::loadUsersData()
 
     int rowsCount;
     file >> rowsCount;
-    qDebug() << rowsCount;
+    // qDebug() << rowsCount;
 
     string header;
     getline(file, header);
     string skipHeadaer;
-    for(int i=0; i<9; i++) {
+    for(int i=0; i<7; i++) {
         file >> skipHeadaer;
-        // qDebug() << headerFake;
+        qDebug() << skipHeadaer;
     }
 
     int row = 0;
     while (row != rowsCount) {
         userCourses.clear();
         file >> name >> username >> password >> role >> id;
-        // qDebug() << name;
-        // qDebug() << username;
-        // qDebug() << password;
-        // qDebug() << role;
+        qDebug() << name;
+        qDebug() << username;
+        qDebug() << password;
+        qDebug() << role;
         role = (UserRole) role;
         if (role != ADMIN){
             file >> coursesNum;
@@ -105,6 +105,43 @@ bool Banner::loadUsersData()
     if(users.empty()) {
         return false;
     }
+    return true;
+}
+
+bool Banner::saveCoursesData()
+{
+    ofstream file("courses.txt");
+
+    if (!file.is_open()){
+        return false;
+    }
+    // Write Rows Count At the Top of the file to fix the Loading issue casues by file.eof()
+    int rowsCount = courses.size();
+    file << rowsCount << endl;
+    // Header
+    file << "ID Name Department Credit_Hours Instructor_Username Time En_Students_Num En_Students_IDs Waiting_Students_Num Waiting_Students_IDs\n";
+
+    for (auto& user: users) {
+        file << user.second->getName().toStdString() << " "
+             << user.second->getUsername().toStdString() << " "
+             << user.second->getPassword().toStdString() << " "
+             << user.second->getRole() << " "
+             << user.second->getID().toStdString() << " ";
+        vector<Course*> userCourses;
+        if (user.second->getRole() == STUDENT) {
+            userCourses = dynamic_cast<Student*>(user.second)->getCourses();
+        } else if (user.second->getRole() == INSTRUCTOR) {
+            userCourses = dynamic_cast<Instructor*>(user.second)->getCourses();
+        }
+        if (user.second->getRole() != ADMIN) {
+            file << userCourses.size() << " " ;
+            // for (auto& course: userCourses) {
+            // file << course.getID() << " ";
+            // }
+        }
+        file << endl;
+    }
+    file.close();
     return true;
 }
 
@@ -268,6 +305,7 @@ bool Banner::saveData()
 {
     // if (saveCoursesData()){
     if (saveUsersData()){
+        qDebug() << "Saved Data Successfully!";
         return true;
     } else {
         return false;

@@ -52,7 +52,7 @@ void cupage::on_createUserButton_clicked()
         this->close();
     } else {
         delete newUser;
-        showError(this, "Entered username is already registered!");
+        showError(this, "Entered username already registered!");
     }
 
 }

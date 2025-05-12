@@ -31,15 +31,14 @@ void LoginPage::on_loginButton_clicked()
         showError(this, "Wrong username or password");
         return;
     }
-    showSuccess(this, (result == 1) ? "Admin Logged in" : "User Logged in");
+    // showSuccess(this, (result == 1) ? "Admin Logged in" : "User Logged in");
     if (result == 1) {
         AdminDashboard* ad = new AdminDashboard(this);
-        connect(ad, &QDialog::finished, this, &LoginPage::onChildDialogClosed,
-                Qt::QueuedConnection);
+        connect(ad, &QDialog::finished, this, &LoginPage::onChildDialogClosed);
         ad->setBanner(banner);
         ad->show();
-        this->close();
-        ad->setAttribute(Qt::WA_DeleteOnClose);
+        // this->close();
+        this->hide();
     } else {
         // open regular Dashboard
         Dashboard* d = new Dashboard(this);
@@ -52,6 +51,8 @@ void LoginPage::on_loginButton_clicked()
 
 void LoginPage::onChildDialogClosed(int result)
 {
+    // this->show();
+    qDebug() << "Closing App";
     this->show();
-    // this->close();
+    this->close();
 }

@@ -296,7 +296,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Admin Dashboard</string>
+   <string>UCRS - Admin Dashboard</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {
@@ -397,7 +397,7 @@ QHeaderView::section {
         </font>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="userManagementTab">
         <attribute name="title">
@@ -581,12 +581,12 @@ QHeaderView::section {
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>Edit Course</string>
+                <string>Edit / Delete User</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="deleteCourseButton">
+              <widget class="QPushButton" name="reloadCoursesButton">
                <property name="font">
                 <font>
                  <family>Century Gothic</family>
@@ -597,7 +597,7 @@ QHeaderView::section {
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>Delete Course</string>
+                <string>Reload Table</string>
                </property>
               </widget>
              </item>
