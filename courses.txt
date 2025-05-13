@@ -1,0 +1,7 @@
+5
+ID|Name|Department|Credit_Hours|Capacity|Instructor_Username|Time|En_Students_Num|En_Students_Usernames|Waiting_Students_Num|Waiting_Students_Usernames
+110|CS 1|CS&CE|3|30|hishamghazy|UW-10:00|0|0|
+153|Intro to Business|Business|3|10|ahmedmustafa|MR-08:30|0|0|
+173|Adminstration|Business|3|30|ahmedmustafa|UW-10:00|0|0|
+210|CS 2|CS&CE|3|30|ibrahimtarek|MR-08:30|0|0|
+211|CS II Lab|CS&CE|1|15|ragabeid|T-02:00|0|0|

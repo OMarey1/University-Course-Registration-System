@@ -1,0 +1,11 @@
+9
+Name|Username|Password|Role|ID|Courses_Number|Courses_IDs
+Omar Marey|admin|admin123|0|900158261|
+Ahmed Ashraf|ahmedashraf|ahmed321|0|9002299871|
+Ahmed Mustafa|ahmedmustafa|ahmed123|1|900123124|2|173|153|
+Ali Elkomy|alielkomy|ali12345|2|900241231|0|
+Andrew Khalifa|andrewkhalifa|andrew12|2|90012341|0|
+Hisham Ghazy|hishamghazy|hisham12|1|900972146|1|110|
+Ibrahim Tarek|ibrahimtarek|ibrahim1|1|9000214761|1|210|
+Ragab Eid|ragabeid|ragab123|1|9009842124|1|211|
+Zeyad Elmoghazy|ziad|ziad1234|2|900241661|0|

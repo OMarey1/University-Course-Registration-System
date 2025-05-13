@@ -97,7 +97,7 @@ void CMPage::on_editCourseButton_clicked() {
         for (const auto& userPair : users) {
             User* user = userPair.second;
             if (user->getRole() == INSTRUCTOR) {
-                instructorComboBox->addItem(user->getName(), QVariant::fromValue(static_cast<Instructor*>(user)));
+                instructorComboBox->addItem(user->getUsername(), QVariant::fromValue(static_cast<Instructor*>(user)));
                 if (user == course->getInstructor()) {
                     instructorComboBox->setCurrentIndex(instructorComboBox->count() - 1);
                 }
