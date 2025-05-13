@@ -95,23 +95,13 @@ void ReportsPage::on_generatePushButton_clicked()
                 QMessageBox::warning(this, "Error", "Only Insructors can access this");
                 return;
             }
-            auto instructors= banner->listInstructors();
-            int totalRow =0;
-            for(const auto& pair : instructors)
-            {
-                Instructor* instructor = pair.second;
-                totalRow += instructor -> getCourses().size();
-            }
+            auto registerdCourses = instructor->getCourses();
             const QStringList headers={"Instructor","CourseID","Course Name","CreditHours","Schedule","Enrolled"};
             ui->reportWidget->setColumnCount(headers.size());
             ui->reportWidget->setHorizontalHeaderLabels(headers);
-            ui->reportWidget->setRowCount(totalRow);
+            ui->reportWidget->setRowCount(registerdCourses.size());
             int row=0;
-            for(const auto& pair: instructors)
-            {
-                Instructor* instructor = pair.second;
-                auto courses = instructor->getCourses();
-                for(Course* course:courses)
+                for(Course* course:registerdCourses)
                 {
                     ui->reportWidget->setItem(row, 0, new QTableWidgetItem(instructor->getName()));
                     ui->reportWidget->setItem(row, 1, new QTableWidgetItem(course->getCourseID()));
@@ -121,7 +111,6 @@ void ReportsPage::on_generatePushButton_clicked()
                     ui->reportWidget->setItem(row, 5, new QTableWidgetItem(QString::number(course->getEnrolledStudentsNumber())));
                     row++;
                 }
-            }
             ui->reportWidget->resizeColumnsToContents();
         }
 }
