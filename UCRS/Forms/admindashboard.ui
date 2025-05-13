@@ -581,7 +581,7 @@ QHeaderView::section {
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>Edit / Delete User</string>
+                <string>Edit / Delete Course</string>
                </property>
               </widget>
              </item>

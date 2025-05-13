@@ -37,6 +37,8 @@ private slots:
 
     void on_reloadCoursesButton_clicked();
 
+    void on_editCourseButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     Banner* banner;

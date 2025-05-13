@@ -15,10 +15,10 @@ CMPage::CMPage(QWidget *parent)
     , banner(nullptr)
 {
     ui->setupUi(this);
-    connect(ui->editCourseButton, &QPushButton::clicked, this, &CMPage::on_editCourseButton_clicked);
-    connect(ui->deleteCourseButton, &QPushButton::clicked, this, &CMPage::on_deleteCourseButton_clicked);
-    connect(ui->searchButton, &QPushButton::clicked, this, &CMPage::on_searchButton_clicked);
-    connect(ui->coursesTable, &QTableWidget::itemSelectionChanged, this, &CMPage::on_coursesTable_itemSelectionChanged);
+    // connect(ui->editCourseButton, &QPushButton::clicked, this, &CMPage::on_editCourseButton_clicked);
+    // connect(ui->deleteCourseButton, &QPushButton::clicked, this, &CMPage::on_deleteCourseButton_clicked);
+    // connect(ui->searchButton, &QPushButton::clicked, this, &CMPage::on_searchButton_clicked);
+    // connect(ui->coursesTable, &QTableWidget::itemSelectionChanged, this, &CMPage::on_coursesTable_itemSelectionChanged);
 }
 
 CMPage::~CMPage()
@@ -60,68 +60,6 @@ void CMPage::populateCoursesTable(const QString& instructorFilter, const QString
         ui->coursesTable->setItem(row, 5, new QTableWidgetItem(QString::number(course->getCapacity())));
     }
 }
-
-// void CMPage::on_addCourseButton_clicked() {
-//     QDialog dialog(this);
-//     QFormLayout form(&dialog);
-
-//     QLineEdit *idLineEdit = new QLineEdit(&dialog);
-//     QLineEdit *nameLineEdit = new QLineEdit(&dialog);
-//     QSpinBox *creditsSpinBox = new QSpinBox(&dialog);
-//     creditsSpinBox->setRange(1, 6);
-//     QComboBox *instructorComboBox = new QComboBox(&dialog);
-//     QSpinBox *capacitySpinBox = new QSpinBox(&dialog);
-//     capacitySpinBox->setRange(1, 200);
-//     QLineEdit *timeLineEdit = new QLineEdit(&dialog);
-//     QLineEdit *deptLineEdit = new QLineEdit(&dialog);
-
-//     if (banner) {
-//         auto users = banner->listUsers();
-//         for (const auto& userPair : users) {
-//             User* user = userPair.second;
-//             if (user->getRole() == INSTRUCTOR) {
-//                 instructorComboBox->addItem(user->getName(), QVariant::fromValue(static_cast<Instructor*>(user)));
-//             }
-//         }
-//     }
-
-//     form.addRow("Course ID:", idLineEdit);
-//     form.addRow("Course Name:", nameLineEdit);
-//     form.addRow("Credits:", creditsSpinBox);
-//     form.addRow("Instructor:", instructorComboBox);
-//     form.addRow("Capacity:", capacitySpinBox);
-//     form.addRow("Schedule Time:", timeLineEdit);
-//     form.addRow("Department:", deptLineEdit);
-
-//     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
-//     form.addRow(&buttonBox);
-
-//     connect(&buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
-//     connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
-
-//     if (dialog.exec() == QDialog::Accepted) {
-//         QString id = idLineEdit->text();
-//         QString name = nameLineEdit->text();
-//         unsigned int credits = creditsSpinBox->value();
-//         Instructor* instructor = qvariant_cast<Instructor*>(instructorComboBox->currentData());
-//         unsigned int capacity = capacitySpinBox->value();
-//         QString time = timeLineEdit->text();
-//         QString dept = deptLineEdit->text();
-
-//         if (id.isEmpty() || name.isEmpty() || time.isEmpty() || dept.isEmpty() || !instructor) {
-//             QMessageBox::warning(this, "Error", "All fields must be filled.");
-//             return;
-//         }
-
-//         Course* newCourse = new Course(id.toStdString(), name.toStdString(), credits, instructor, capacity, time.toStdString(), dept.toStdString());
-//         if (banner->createCourse(newCourse)) {
-//             populateCoursesTable();
-//         } else {
-//             QMessageBox::warning(this, "Error", "Course ID already exists.");
-//             delete newCourse;
-//         }
-//     }
-// }
 
 void CMPage::on_editCourseButton_clicked() {
     QList<QTableWidgetItem*> selectedItems = ui->coursesTable->selectedItems();
@@ -217,6 +155,7 @@ void CMPage::on_searchButton_clicked() {
 void CMPage::on_coursesTable_itemSelectionChanged() {
     QList<QTableWidgetItem*> selectedItems = ui->coursesTable->selectedItems();
     ui->waitingListTable->setRowCount(0);
+    ui->enrolledStudentsTable->setRowCount(0);
 
     if (selectedItems.isEmpty()) return;
 
@@ -226,11 +165,21 @@ void CMPage::on_coursesTable_itemSelectionChanged() {
 
     if (!course) return;
 
+    // Populate waiting students
     vector<Student*> waitingList = course->getWaitingList();
     for (auto& student: waitingList){
         int wlRow = ui->waitingListTable->rowCount();
         ui->waitingListTable->insertRow(wlRow);
         ui->waitingListTable->setItem(wlRow, 0, new QTableWidgetItem(student->getName()));
         ui->waitingListTable->setItem(wlRow, 1, new QTableWidgetItem(student->getID()));
+    }
+
+    // Populate enrolled students
+    vector<Student*> enrolledStudents = course->getEnrolledStudents();
+    for (auto& student: enrolledStudents) {
+        int esRow = ui->enrolledStudentsTable->rowCount();
+        ui->enrolledStudentsTable->insertRow(esRow);
+        ui->enrolledStudentsTable->setItem(esRow, 0, new QTableWidgetItem(student->getName()));
+        ui->enrolledStudentsTable->setItem(esRow, 1, new QTableWidgetItem(student->getID()));
     }
 }

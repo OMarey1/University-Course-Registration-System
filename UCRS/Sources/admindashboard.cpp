@@ -6,6 +6,7 @@
 #include "../Headers/cupage.h"
 #include "../Headers/eupage.h"
 #include "../Headers/ccpage.h"
+#include "../Headers/cmpage.h"
 
 AdminDashboard::AdminDashboard(QWidget *parent)
     : QDialog(parent)
@@ -152,6 +153,17 @@ void AdminDashboard::on_addCourseButton_clicked()
     cc->setBanner(banner);
     cc->show();
     cc->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void AdminDashboard::on_editCourseButton_clicked()
+{
+    CMPage* cm = new CMPage(this);
+    cm->setModal(true);
+    // connect the dialog’s finished() to your slot
+    connect(cm, &QDialog::finished, this, &AdminDashboard::onChildDialogClosed);
+    cm->setBanner(banner);
+    cm->show();
+    cm->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void AdminDashboard::on_reloadCoursesButton_clicked()
