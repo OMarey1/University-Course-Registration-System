@@ -396,6 +396,26 @@ bool Banner::createCourse(Course *course)
     }
 }
 
+bool Banner::deleteCourse(const QString &id)
+{
+    try {
+        courses.erase(id);
+        return 1;
+    } catch (const invalid_argument& e) {
+        return 0;
+    }
+}
+
+Course *Banner::searchCourse(const QString &id)
+{
+    try {
+        return courses.at(id);
+    } catch (const out_of_range & e) {
+        // Course is not found;
+        return nullptr;
+    }
+}
+
 map<QString, Course *> Banner::listCourses()
 {
     return courses;
@@ -479,10 +499,6 @@ bool Banner::saveData()
     } else {
         return false;
     }
-}
-map<QString,Course*> Banner::listCourses()
-{
-    return courses;
 }
 
 map<QString,Instructor*> Banner::listInstructors()

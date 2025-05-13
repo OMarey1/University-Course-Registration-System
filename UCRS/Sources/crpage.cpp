@@ -13,3 +13,8 @@ CRPage::~CRPage()
 {
     delete ui;
 }
+
+void CRPage::setBanner(Banner *b)
+{
+    banner = b;
+}

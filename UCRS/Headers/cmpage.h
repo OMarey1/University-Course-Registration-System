@@ -18,7 +18,6 @@ public:
     void setBanner(Banner* b);
 
 private slots:
-    void on_addCourseButton_clicked();
     void on_editCourseButton_clicked();
     void on_deleteCourseButton_clicked();
     void on_searchButton_clicked();

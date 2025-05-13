@@ -39,13 +39,14 @@ public:
     QString getDepartment() const;
     vector<Student *> getEnrolledStudents() const;
     vector<Student *> getWaitingList() const;
+    int getEnrolledStudentsNumber() const;
 
     // Setters
     void setInstructor(Instructor *instr);
     void setEnrolledStudents(const vector<Student *> &students);
     void setWaitingList(const queue<Student *> &waiting);
-    queue<Student *> getWaitingList() const;
-    int getEnrolledStudentsNumber() const;
+    // queue<Student *> getWaitingList() const;
+    void update(const QString &name, unsigned int credits,Instructor *instructor, unsigned int cap, const QString &time, const QString &dept);
 
     // Course operations
     bool enrollStudent(Student *student);

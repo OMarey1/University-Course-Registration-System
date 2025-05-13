@@ -54,11 +54,11 @@ void ReportsPage::on_generatePushButton_clicked()
             ui->reportWidget->setRowCount(registeredCourses.size());
             int row = 0;
             for (Course* course : registeredCourses) {
-                ui->reportWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(course->getCourseID())));
-                ui->reportWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(course->getCourseName())));
+                ui->reportWidget->setItem(row, 0, new QTableWidgetItem(course->getCourseID()));
+                ui->reportWidget->setItem(row, 1, new QTableWidgetItem(course->getCourseName()));
                 Instructor* instructor = course->getInstructor();
                 ui->reportWidget->setItem(row, 2, new QTableWidgetItem(instructor ? (instructor->getName()) : "N/A"));
-                ui->reportWidget->setItem(row, 3, new QTableWidgetItem(QString::fromStdString(course->getScheduleTime())));
+                ui->reportWidget->setItem(row, 3, new QTableWidgetItem(course->getScheduleTime()));
                 row++;
             }
             ui->reportWidget->resizeColumnsToContents();
@@ -73,12 +73,12 @@ void ReportsPage::on_generatePushButton_clicked()
             for(const auto &c: Courses)
             {
                 Course*course = c.second;
-                ui->reportWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(course->getCourseID())));
-                ui->reportWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(course->getCourseName())));
+                ui->reportWidget->setItem(row, 0, new QTableWidgetItem(course->getCourseID()));
+                ui->reportWidget->setItem(row, 1, new QTableWidgetItem(course->getCourseName()));
                 Instructor* instructor = course->getInstructor();
                 ui->reportWidget->setItem(row, 2, new QTableWidgetItem(instructor ? (instructor->getName()) : "N/A"));
                 ui->reportWidget->setItem(row, 3, new QTableWidgetItem(QString::number(course->getCreditHours())));
-                ui->reportWidget->setItem(row, 4, new QTableWidgetItem(QString::fromStdString(course->getScheduleTime())));
+                ui->reportWidget->setItem(row, 4, new QTableWidgetItem(course->getScheduleTime()));
                 ui->reportWidget->setItem(row, 5, new QTableWidgetItem(QString::number(course->getEnrolledStudentsNumber())));
                 ui->reportWidget->setItem(row, 6, new QTableWidgetItem(QString::number(course->getCapacity())));
                 row++;
@@ -113,10 +113,10 @@ void ReportsPage::on_generatePushButton_clicked()
                 for(Course* course:courses)
                 {
                     ui->reportWidget->setItem(row, 0, new QTableWidgetItem(instructor->getName()));
-                    ui->reportWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(course->getCourseID())));
-                    ui->reportWidget->setItem(row, 2, new QTableWidgetItem(QString::fromStdString(course->getCourseName())));
+                    ui->reportWidget->setItem(row, 1, new QTableWidgetItem(course->getCourseID()));
+                    ui->reportWidget->setItem(row, 2, new QTableWidgetItem(course->getCourseName()));
                     ui->reportWidget->setItem(row, 3, new QTableWidgetItem(QString::number(course->getCreditHours())));
-                    ui->reportWidget->setItem(row, 4, new QTableWidgetItem(QString::fromStdString(course->getScheduleTime())));
+                    ui->reportWidget->setItem(row, 4, new QTableWidgetItem(course->getScheduleTime()));
                     ui->reportWidget->setItem(row, 5, new QTableWidgetItem(QString::number(course->getEnrolledStudentsNumber())));
                     row++;
                 }
