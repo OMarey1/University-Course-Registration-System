@@ -6,24 +6,111 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>817</width>
     <height>614</height>
+=======
+    <width>800</width>
+    <height>600</height>
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Course Management</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #000080;
-</string>
+   <string notr="true">background-color: #f0f0f0;</string>
   </property>
-  <widget class="QTableWidget" name="TableView">
+  <widget class="QLabel" name="titleLabel">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>20</x>
+     <y>10</y>
+     <width>761</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;COURSE MANAGEMENT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="searchGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>761</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Search Filters</string>
+   </property>
+   <widget class="QLineEdit" name="instructorSearch">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>200</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Instructor Name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="departmentSearch">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>30</y>
+      <width>200</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Department</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="timeSearch">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>30</y>
+      <width>200</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Time Slot</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchButton">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>30</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Search</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTableWidget" name="coursesTable">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
      <y>150</y>
+<<<<<<< HEAD
      <width>631</width>
      <height>101</height>
+=======
+     <width>761</width>
+     <height>251</height>
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
     </rect>
    </property>
    <column>
@@ -33,21 +120,22 @@
    </column>
    <column>
     <property name="text">
-     <string>New Column</string>
+     <string>Course Name</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Instructor Name</string>
+     <string>Instructor</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>Credit Hours</string>
+     <string>Credits</string>
     </property>
    </column>
    <column>
     <property name="text">
+<<<<<<< HEAD
      <string>Schedule Time</string>
     </property>
    </column>
@@ -157,39 +245,95 @@
    <column>
     <property name="text">
      <string>Student Name</string>
+=======
+     <string>Schedule</string>
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
     </property>
    </column>
    <column>
     <property name="text">
-     <string>ID</string>
+     <string>Capacity</string>
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QGroupBox" name="actionsGroupBox">
    <property name="geometry">
     <rect>
+<<<<<<< HEAD
      <x>330</x>
      <y>400</y>
      <width>131</width>
      <height>16</height>
+=======
+     <x>20</x>
+     <y>410</y>
+     <width>761</width>
+     <height>141</height>
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
     </rect>
    </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; text-decoration: underline;&quot;&gt;Waitlisted Students:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <property name="title">
+    <string>Actions</string>
    </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>481</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;COURSE MANAGEMENT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
+   <widget class="QPushButton" name="editCourseButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>30</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Edit Course</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteCourseButton">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>30</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete Course</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="waitingListTable">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>30</y>
+      <width>341</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Student Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Student ID</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="waitingListLabel">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>10</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Waiting List:</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

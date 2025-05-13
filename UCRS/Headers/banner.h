@@ -19,7 +19,10 @@ private:
     bool loadUsersData();
     bool saveCoursesData();
     bool loadCoursesData();
+<<<<<<< HEAD
     bool updateCourseReferences();
+=======
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
 public:
     Banner();
     ~Banner();
@@ -32,11 +35,18 @@ public:
     User* searchUser(const QString& username);
     map<QString, User*> listUsers();
     bool validatePassword(const QString& pass);
+<<<<<<< HEAD
     bool createCourse(Course* course);
     // bool deleteCourse (const QString& id);
     // Course searchCourse();
     map<QString, Course*> listCourses();
     // bool generateReport();
+=======
+    bool createCourse(Course course);
+    bool deleteCourse (const QString& id);
+    Course searchCourse();
+    bool generateReport();
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
     bool loadData();
     bool saveData();
 };

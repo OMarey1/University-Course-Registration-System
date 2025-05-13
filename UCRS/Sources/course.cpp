@@ -11,22 +11,51 @@ Course::Course(const QString& id, const QString& name, unsigned int credits,
     : courseID(id), courseName(name), creditHours(credits), instructor(instructor),
     capacity(cap), scheduleTime(time), department(dept) {}
 
+<<<<<<< HEAD
 QString Course::getCourseID() const { return courseID; }
 
 QString Course::getCourseName() const { return courseName; }
+=======
+string Course::getCourseID() const {
+    return courseID;
+}
 
-unsigned int Course::getCreditHours() const { return creditHours; }
+string Course::getCourseName() const {
+    return courseName;
+}
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
 
-Instructor* Course::getInstructor() const { return instructor; }
+unsigned int Course::getCreditHours() const {
+    return creditHours;
+}
 
-unsigned int Course::getCapacity() const { return capacity; }
+Instructor* Course::getInstructor() const {
+    return instructor;
+}
 
+unsigned int Course::getCapacity() const {
+    return capacity;
+}
+
+<<<<<<< HEAD
 QString Course::getScheduleTime() const { return scheduleTime; }
 
 QString Course::getDepartment() const { return department; }
+=======
+string Course::getScheduleTime() const {
+    return scheduleTime;
+}
 
-vector<Student*> Course::getEnrolledStudents() const { return enrolledStudents; }
+string Course::getDepartment() const {
+    return department;
+}
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
 
+vector<Student*> Course::getEnrolledStudents() const {
+    return enrolledStudents;
+}
+
+<<<<<<< HEAD
 vector<Student*> Course::getWaitingList() const {
     vector<Student*> waitingListVector;
     waitingListVector.reserve(waitingList.size());
@@ -51,6 +80,11 @@ void Course::setWaitingList(const queue<Student*>& waiting) {
     waitingList = waiting;
 }
 
+=======
+queue<Student*> Course::getWaitingList() const {
+    return waitingList;
+}
+>>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
 
 bool Course::enrollStudent(Student* student) {
     // Check if already enrolled
