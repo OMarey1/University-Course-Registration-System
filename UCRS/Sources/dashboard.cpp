@@ -68,6 +68,7 @@ void Dashboard::on_registerCoursesButton_clicked()
 {
     CRPage* cr = new CRPage(NULL);
     cr->setBanner(banner);
+    cr->setStudent(dynamic_cast<Student*>(banner->getCurrentUser()));
     this -> close();
     cr -> show();
 }

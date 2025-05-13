@@ -29,6 +29,8 @@ private slots:
     void updateCourseDetails();
     void updateRegisteredCourseDetails();
 
+    void on_backButton_clicked();
+
 private:
     Ui::CRPage *ui;
     Banner* m_banner;

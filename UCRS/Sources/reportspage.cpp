@@ -189,7 +189,7 @@ void ReportsPage::on_exportPushButton_clicked()
             }
             rowData<<cell;
         }
-        stream<< rowData.join(separator);
+        stream<< rowData.join(separator)<<"\n";
     }
     file.close();
     QMessageBox::information(this, "Export", "Report exported successfully to:\n"+generatedReport);

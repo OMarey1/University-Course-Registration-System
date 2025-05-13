@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>700</height>
+    <width>1200</width>
+    <height>690</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@ QSpinBox {
 }
 
 QLineEdit:disabled  {
-	    background-color: #222;
+    background-color: #222;
 }
 
 QLineEdit:focus {
@@ -69,18 +69,57 @@ QPushButton {
 }
 
 QPushButton:disabled {
-	    background-color: #222;
+    background-color: #222;
 }
 
 QPushButton:hover {
     background-color: #19A2E1;
-    /*transform: translateY(-1px)*/;
-   /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
 }
 QPushButton:pressed {
     background-color: #0D4E6F;
-    /*transform: translateY(1px);*/
 }
+
+QGroupBox {
+    border: 2px solid #0F628B;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    color: #19A2E1;
+    font-weight: bold;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 5px;
+}
+
+QTableWidget {
+    background-color: #002042;
+    border: 2px solid #0F628B;
+    border-radius: 8px;
+    gridline-color: #0F628B;
+    color: white;
+    selection-background-color: #19A2E1;
+    selection-color: white;
+}
+
+QTableWidget::item {
+    padding: 5px;
+}
+
+QTableWidget::item:selected {
+    background-color: #19A2E1;
+}
+
+QHeaderView::section {
+    background-color: #0F628B;
+    color: white;
+    padding: 5px;
+    border: 1px solid #19A2E1;
+    font-weight: bold;
+}
+
 #titleLabel {
     font-size: 36px;
     font-weight: bold;
@@ -88,51 +127,16 @@ QPushButton:pressed {
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
-#subtitleLabel {
-    font-size: 16px;
-    color: #7F9CB5;
-    margin-bottom: 30px;
-    letter-spacing: 0.5px;
+
+#searchLineEdit {
+    min-width: 300px;
 }
 
-#pageTitleLabel {
-    font-size: 22px;
-    font-weight: bold;
-    color: #19A2E1;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
-}
-
-#loginBox {
-    background-color: #001829;
-    border-radius: 20px;
-    padding: 50px;
-    margin: 20px;
-    min-width: 350px;
-    border: 1px solid rgba(25, 162, 225, 0.1);
- /*   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);*/
-}
-#errorLabel {
-    color: #FF4444;
-    font-size: 13px;
-    margin-top: 10px;
-    font-weight: 500;
-}
-QMessageBox {
-    background-color: #001021;
-    color: white;
-}
-QMessageBox QPushButton {
-    min-width: 80px;
-    padding: 8px 16px;
-}
-#usernameLineEdit, #passwordLineEdit {
-    padding-left: 40px;
-}
-#versionLabel {
-    color: #4A6B8A;
-    font-size: 12px;
-    margin-top: 20px;
+#detailsLabel {
+    padding: 10px;
+    background-color: #002042;
+    border-radius: 8px;
+    border: 1px solid #0F628B;
 }
 </string>
   </property>
@@ -145,6 +149,13 @@ QMessageBox QPushButton {
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="backButton">
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="searchGroupBox">
      <property name="title">
       <string>Search Courses</string>
@@ -153,7 +164,7 @@ QMessageBox QPushButton {
       <item>
        <widget class="QLineEdit" name="searchLineEdit">
         <property name="placeholderText">
-         <string>Search by course name or ID...</string>
+         <string>Search by course ID...</string>
         </property>
        </widget>
       </item>
@@ -176,7 +187,17 @@ QMessageBox QPushButton {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableWidget" name="coursesTable"/>
+         <widget class="QTableWidget" name="coursesTable">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="registerButton">
@@ -195,7 +216,17 @@ QMessageBox QPushButton {
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QTableWidget" name="registeredTable"/>
+         <widget class="QTableWidget" name="registeredTable">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="dropButton">
@@ -208,25 +239,6 @@ QMessageBox QPushButton {
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="detailsGroupBox">
-     <property name="title">
-      <string>Course Details</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QLabel" name="detailsLabel">
-        <property name="text">
-         <string>Select a course to view details</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
    </item>
   </layout>
  </widget>
