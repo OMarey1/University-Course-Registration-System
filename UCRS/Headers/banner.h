@@ -17,8 +17,8 @@ private:
 
     bool saveUsersData();
     bool loadUsersData();
-    // bool saveCoursesData();
-    // bool loadCoursesData();
+    bool saveCoursesData();
+    bool loadCoursesData();
 public:
     Banner();
     ~Banner();
@@ -30,10 +30,10 @@ public:
     // vector<User*> listUsers();
     map<QString, User*> listUsers();
     bool validatePassword(const QString& pass);
-    // bool createCourse(Course course);
-    // bool deleteCourse (const QString& id);
-    // Course searchCourse();
-    // bool generateReport();
+    bool createCourse(Course course);
+    bool deleteCourse (const QString& id);
+    Course searchCourse();
+    bool generateReport();
     bool loadData();
     bool saveData();
 };
