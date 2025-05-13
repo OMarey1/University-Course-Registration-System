@@ -6,182 +6,103 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>900</width>
     <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Course Registration System</string>
+   <string>Course Registration</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="titleLabel">
-     <property name="styleSheet">
-      <string notr="true">font-size: 24px; font-weight: bold; color: #2E4053; padding: 12px;</string>
-     </property>
      <property name="text">
-      <string>Course Registration</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Course Registration System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
-
-   <!-- Search Section -->
    <item>
-    <widget class="QLineEdit" name="searchField">
-     <property name="placeholderText">
-      <string>Search courses (ID, Name, Instructor)...</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">padding: 8px; font-size: 14px; border-radius: 4px;</string>
-     </property>
-    </widget>
-   </item>
-
-   <!-- Main Content Area -->
-   <item>
-    <layout class="QHBoxLayout" name="mainLayout">
-     <item>
-      <widget class="QTableWidget" name="coursesTable">
-       <property name="styleSheet">
-        <string notr="true">
-          QTableWidget {
-            background: #F8F9F9;
-            border: 1px solid #BFC9CA;
-            border-radius: 8px;
-          }
-          QHeaderView::section {
-            background: #AED6F1;
-            padding: 6px;
-          }
-        </string>
-       </property>
-       <property name="columnCount">
-        <number>6</number>
-       </property>
-       <property name="selectionMode">
-        <enum>QAbstractItemView::SingleSelection</enum>
-       </property>
-      </widget>
-     </item>
-
-     <!-- Action Buttons -->
-     <item>
-      <layout class="QVBoxLayout" name="buttonLayout">
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="registerButton">
-         <property name="styleSheet">
-          <string notr="true">
-            QPushButton {
-              font-size: 15px;
-              font-weight: bold;
-              color: white;
-              background: #2874A6;
-              border-radius: 6px;
-              padding: 8px 16px;
-            }
-            QPushButton:hover { background: #1B4F72; }
-          </string>
-         </property>
-         <property name="text">
-          <string>Register</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="dropButton">
-         <property name="styleSheet">
-          <string notr="true">
-            QPushButton {
-              font-size: 15px;
-              font-weight: bold;
-              color: white;
-              background: #C0392B;
-              border-radius: 6px;
-              padding: 8px 16px;
-            }
-            QPushButton:hover { background: #922B21; }
-          </string>
-         </property>
-         <property name="text">
-          <string>Drop Course</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-
-   <!-- Waiting List Section -->
-   <item>
-    <widget class="QGroupBox" name="waitingListGroup">
+    <widget class="QGroupBox" name="searchGroupBox">
      <property name="title">
-      <string>Waiting List</string>
+      <string>Search Courses</string>
      </property>
-     <layout class="QVBoxLayout" name="waitingListLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QTableWidget" name="waitingListTable">
-        <property name="columnCount">
-         <number>2</number>
+       <widget class="QLineEdit" name="searchLineEdit">
+        <property name="placeholderText">
+         <string>Search by course name or ID...</string>
         </property>
-        <property name="styleSheet">
-         <string notr="true">
-           QTableWidget {
-             background: #FEF9E7;
-             border: 1px solid #F7DC6F;
-             border-radius: 8px;
-           }
-         </string>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="searchButton">
+        <property name="text">
+         <string>Search</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-
-   <!-- Error Message Display -->
    <item>
-    <widget class="QLabel" name="errorLabel">
-     <property name="styleSheet">
-      <string notr="true">
-        color: #C0392B;
-        font-size: 13px;
-        font-weight: bold;
-        padding: 4px;
-      </string>
+    <layout class="QHBoxLayout" name="coursesLayout">
+     <item>
+      <widget class="QGroupBox" name="availableCoursesGroupBox">
+       <property name="title">
+        <string>Available Courses</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTableWidget" name="coursesTable"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="registerButton">
+          <property name="text">
+           <string>Register Selected</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="registeredCoursesGroupBox">
+       <property name="title">
+        <string>My Courses</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableWidget" name="registeredTable"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="dropButton">
+          <property name="text">
+           <string>Drop Selected</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="detailsGroupBox">
+     <property name="title">
+      <string>Course Details</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QLabel" name="detailsLabel">
+        <property name="text">
+         <string>Select a course to view details</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

@@ -72,7 +72,6 @@ bool Banner::loadUsersData()
         getline(ss, username, '|');
         getline(ss, password, '|');
         getline(ss, field, '|');
-        qDebug() << "here1";
         role = stoi(field);
         getline(ss, id, '|');
 
@@ -80,7 +79,6 @@ bool Banner::loadUsersData()
         if (role != ADMIN){
             // Parse courses number
             getline(ss, field, '|');
-            qDebug() << "here2";
             coursesNum = stoi(field);
             // Because of this I have to load the Courses from the file before loading the users
             for (int i = 0; i < coursesNum; ++i) {
@@ -184,11 +182,9 @@ bool Banner::loadCoursesData()
         getline(ss, dep, '|');
         // Parse credit hours
         getline(ss, field, '|');
-        qDebug() << "here3";
         creditHours = stoi(field);
         // Parse capacity
         getline(ss, field, '|');
-        qDebug() << "here4";
         capacity = stoi(field);
         getline(ss, instructorUsername, '|');
         getline(ss, schedule, '|');
@@ -209,7 +205,6 @@ bool Banner::loadCoursesData()
 
         // Read enrolled students
         getline(ss, field, '|');
-        qDebug() << "here5";
         enStudentsNum = stoi(field);
         for (int i = 0; i < enStudentsNum; ++i) {
             string studentUsername;
@@ -222,7 +217,6 @@ bool Banner::loadCoursesData()
 
         // Read waiting list
         getline(ss, field, '|');
-        qDebug() << "here6";
         waitingStudentsNum = stoi(field);
         for (int i = 0; i < waitingStudentsNum; ++i) {
             string studentUsername;
