@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>700</height>
+    <height>729</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,13 +27,6 @@
      </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;COURSE MANAGEMENT&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="backPushButton">
-     <property name="text">
-      <string>Back</string>
      </property>
     </widget>
    </item>

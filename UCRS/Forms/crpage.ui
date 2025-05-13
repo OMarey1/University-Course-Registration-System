@@ -13,6 +13,129 @@
   <property name="windowTitle">
    <string>Course Registration</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #001021;
+}
+QWidget {
+    color: white;
+    font-family: &quot;Century Gothic&quot;;
+}
+QLabel {
+    color: white;
+}
+QLineEdit {
+    background-color: #002042;
+    border: 2px solid #0F628B;
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: white;
+    font-size: 16px;
+    margin: 5px;
+}
+
+QSpinBox {
+    background-color: #002042;
+    border: 2px solid #0F628B;
+    border-radius: 8px;
+    padding: 5px 8px;
+    color: white;
+    font-size: 16px;
+    margin: 5px;
+}
+
+QLineEdit:disabled  {
+	    background-color: #222;
+}
+
+QLineEdit:focus {
+    border: 2px solid #19A2E1;
+    background-color: #002852;
+}
+QLineEdit:hover {
+    background-color: #002852;
+}
+QPushButton {
+    background-color: #0F628B;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 120px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+QPushButton:disabled {
+	    background-color: #222;
+}
+
+QPushButton:hover {
+    background-color: #19A2E1;
+    /*transform: translateY(-1px)*/;
+   /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+}
+QPushButton:pressed {
+    background-color: #0D4E6F;
+    /*transform: translateY(1px);*/
+}
+#titleLabel {
+    font-size: 36px;
+    font-weight: bold;
+    color: #19A2E1;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+#subtitleLabel {
+    font-size: 16px;
+    color: #7F9CB5;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+#pageTitleLabel {
+    font-size: 22px;
+    font-weight: bold;
+    color: #19A2E1;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+#loginBox {
+    background-color: #001829;
+    border-radius: 20px;
+    padding: 50px;
+    margin: 20px;
+    min-width: 350px;
+    border: 1px solid rgba(25, 162, 225, 0.1);
+ /*   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);*/
+}
+#errorLabel {
+    color: #FF4444;
+    font-size: 13px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+QMessageBox {
+    background-color: #001021;
+    color: white;
+}
+QMessageBox QPushButton {
+    min-width: 80px;
+    padding: 8px 16px;
+}
+#usernameLineEdit, #passwordLineEdit {
+    padding-left: 40px;
+}
+#versionLabel {
+    color: #4A6B8A;
+    font-size: 12px;
+    margin-top: 20px;
+}
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="titleLabel">

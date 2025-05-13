@@ -195,11 +195,3 @@ void CMPage::on_coursesTable_itemSelectionChanged() {
     }
 }
 
-void CMPage::on_backPushButton_clicked()
-{
-    Dashboard* d = new Dashboard(NULL);
-    d->setBanner(banner);
-    this->close();
-    d->show();
-}
-

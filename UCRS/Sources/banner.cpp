@@ -84,7 +84,7 @@ bool Banner::loadUsersData()
             for (int i = 0; i < coursesNum; ++i) {
                 string courseId;
                 getline(ss, courseId, '|');
-                qDebug() << courseId;
+                // qDebug() << courseId;
                 try {
                     userCourses.push_back(courses.at(QString::fromStdString(courseId)));
                 } catch (const std::out_of_range&) {

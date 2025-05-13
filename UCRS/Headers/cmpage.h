@@ -23,8 +23,6 @@ private slots:
     void on_searchButton_clicked();
     void on_coursesTable_itemSelectionChanged();
 
-    void on_backPushButton_clicked();
-
 private:
     Ui::CMPage *ui;
     Banner* banner;
