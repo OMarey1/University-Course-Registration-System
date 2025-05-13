@@ -13,12 +13,127 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/* Main background and label styling */
+QDialog, QWidget {
+    background: #f5f6fa;
+    color: #222;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+}
+
+QLabel {
+    color: #222;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Header (Reports Page) */
+QLabel#headerLabel {
+    font-size: 32px;
+    font-weight: bold;
+    color: #222;
+}
+
+/* ComboBox (Select Report Type) */
+QComboBox, QComboBox QAbstractItemView {
+    background: #fff;
+    color: #222;
+    border: 1px solid #b2bec3;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 16px;
+}
+
+/* Disabled ComboBox */
+QComboBox:disabled {
+    background: #e0e0e0;
+    color: #888;
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #1677ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+QPushButton:hover {
+    background-color: #0e59c6;
+}
+QPushButton:pressed {
+    background-color: #0a3d91;
+}
+
+/* Table Widget (Generated Report) */
+QTableWidget, QTableView {
+    background: #fff;
+    color: #222;
+    border: 1px solid #b2bec3;
+    border-radius: 8px;
+    gridline-color: #dfe6e9;
+    font-size: 16px;
+}
+
+QHeaderView::section {
+    background-color: #1677ff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px;
+    border: none;
+    border-radius: 0;
+}
+
+QTableWidget::item, QTableView::item {
+    padding: 6px;
+}
+
+/* Group boxes (e.g., Export Options) */
+QGroupBox {
+    border: 1px solid #b2bec3;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+}
+QGroupBox:title {
+    subcontrol-origin: margin;
+    left: 16px;
+    padding: 0 4px 0 4px;
+    background: transparent;
+}
+
+/* Radio buttons (Export Options) */
+QRadioButton {
+    font-size: 15px;
+    color: #222;
+    padding: 4px;
+}
+
+/* Disabled text */
+QLabel:disabled, QRadioButton:disabled {
+    color: #bbb;
+}
+
+/* Make sure everything is visible */
+* {
+    opacity: 1.0;
+}
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
     <widget class="QLabel" name="reportPageWelcome">
      <property name="font">
       <font>
-       <pointsize>28</pointsize>
+       <family>Segoe UI</family>
+       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -72,24 +187,19 @@
     </widget>
    </item>
    <item>
+    <widget class="QTableWidget" name="reportWidget"/>
+   </item>
+   <item>
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <pointsize>16</pointsize>
+       <family>Segoe UI</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
       <string>Generated Report</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTableView" name="viewGeneratedReport">
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="gridStyle">
-      <enum>Qt::PenStyle::DotLine</enum>
      </property>
     </widget>
    </item>
@@ -115,14 +225,14 @@
        <number>10</number>
       </property>
       <item>
-       <widget class="QRadioButton" name="csvRadioButton">
+       <widget class="QRadioButton" name="txtRadioButton">
         <property name="text">
          <string>.txt</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QRadioButton" name="csvRadioButton">
         <property name="text">
          <string>.csv</string>
         </property>

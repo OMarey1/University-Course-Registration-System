@@ -480,3 +480,12 @@ bool Banner::saveData()
         return false;
     }
 }
+map<QString,Course*> Banner::listCourses()
+{
+    return courses;
+}
+
+map<QString,Instructor*> Banner::listInstructors()
+{
+    return instructors;
+}

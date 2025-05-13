@@ -18,6 +18,13 @@ public:
     ~Dashboard();
     void setBanner(Banner* b);
 
+private slots:
+    void on_manageCoursesButton_clicked();
+
+    void on_reportsButton_clicked();
+
+    void on_registerCoursesButton_clicked();
+
 private:
     Ui::Dashboard *ui;
     Banner* banner;

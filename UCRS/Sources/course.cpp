@@ -1,4 +1,4 @@
-#include "../Headers/course.h"
+    #include "../Headers/course.h"
 #include "../Headers/student.h"
 #include "../Headers/instructor.h"
 #include <algorithm>
@@ -85,6 +85,12 @@ queue<Student*> Course::getWaitingList() const {
     return waitingList;
 }
 >>>>>>> 5c1cd429df271dfcc89f040589f70f3862f8ff8a
+
+int Course::getEnrolledStudentsNumber()const
+{
+    return static_cast<int>(enrolledStudents.size());
+
+}
 
 bool Course::enrollStudent(Student* student) {
     // Check if already enrolled
