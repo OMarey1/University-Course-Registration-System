@@ -13,6 +13,7 @@ private:
     map<QString, User *> users;
     map<QString, Course *> courses;
     map<QString, Instructor *> instructors;
+    vector<QString> departments;
     User *thisUser;
     bool isAdmin;
 
@@ -25,6 +26,7 @@ public :
     Banner();
     ~Banner();
     User *getCurrentUser();
+    vector<QString> getDeps() const;
     int login(const QString &uname, const QString &pass);
     void logout();
     bool addUser(User *user);

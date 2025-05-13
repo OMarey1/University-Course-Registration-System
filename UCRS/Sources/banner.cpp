@@ -252,6 +252,8 @@ Banner::Banner() {
         users[adminUser->getUsername()] = adminUser;
         // saveData();
     }
+
+    departments = {"Accounting", "Architecture", "ALI", "Biology", "Chemistry", "CS&CE", "Business", "Economics", "Electronics", "Mechanical", "ELI", "Rhet"};
 }
 
 Banner::~Banner()
@@ -266,6 +268,11 @@ Banner::~Banner()
 User *Banner::getCurrentUser()
 {
     return thisUser;
+}
+
+vector<QString> Banner::getDeps() const
+{
+    return departments;
 }
 
 int Banner::login(const QString &uname, const QString &pass)

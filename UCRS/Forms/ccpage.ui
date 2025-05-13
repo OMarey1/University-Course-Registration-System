@@ -443,6 +443,9 @@
              <height>0</height>
             </size>
            </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
            <item>
             <property name="text">
              <string>Accounting</string>

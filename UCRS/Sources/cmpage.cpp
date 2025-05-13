@@ -89,7 +89,8 @@ void CMPage::on_editCourseButton_clicked() {
     QSpinBox *capacitySpinBox = new QSpinBox(&dialog);
     capacitySpinBox->setValue(course->getCapacity());
     QLineEdit *timeLineEdit = new QLineEdit(course->getScheduleTime(), &dialog);
-    QLineEdit *deptLineEdit = new QLineEdit(course->getDepartment(), &dialog);
+    // QLineEdit *deptLineEdit = new QLineEdit(course->getDepartment(), &dialog);
+    QComboBox *depComboBox = new QComboBox(&dialog);
 
     if (banner) {
         auto users = banner->listUsers();
@@ -102,6 +103,15 @@ void CMPage::on_editCourseButton_clicked() {
                 }
             }
         }
+
+        auto deps = banner->getDeps();
+        for (const auto& dep : deps) {
+
+            depComboBox->addItem(dep);
+            if (dep == course->getDepartment()) {
+                depComboBox->setCurrentIndex(depComboBox->count() - 1);
+            }
+        }
     }
 
     form.addRow("Course ID:", idLineEdit);
@@ -110,7 +120,7 @@ void CMPage::on_editCourseButton_clicked() {
     form.addRow("Instructor:", instructorComboBox);
     form.addRow("Capacity:", capacitySpinBox);
     form.addRow("Schedule Time:", timeLineEdit);
-    form.addRow("Department:", deptLineEdit);
+    form.addRow("Department:", depComboBox);
 
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
     form.addRow(&buttonBox);
@@ -119,7 +129,7 @@ void CMPage::on_editCourseButton_clicked() {
     connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
     if (dialog.exec() == QDialog::Accepted) {
-        course->update(nameLineEdit->text(), creditsSpinBox->value(), qvariant_cast<Instructor*>(instructorComboBox->currentData()),capacitySpinBox->value(),timeLineEdit->text(), deptLineEdit->text());
+        course->update(nameLineEdit->text(), creditsSpinBox->value(), qvariant_cast<Instructor*>(instructorComboBox->currentData()),capacitySpinBox->value(),timeLineEdit->text(), depComboBox->currentText());
 
         banner->saveData();
         populateCoursesTable();

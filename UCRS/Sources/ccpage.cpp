@@ -26,6 +26,13 @@ void CCPage::setBanner(Banner *b)
             ui->instructorComboBox->addItem(user.second->getUsername());
         }
     }
+    ui->depComboBox->clear();
+    auto deps = banner->getDeps();
+    for (const auto& dep : deps) {
+
+        ui->depComboBox->addItem(dep);
+
+    }
 }
 
 void CCPage::on_clearButton_clicked()
