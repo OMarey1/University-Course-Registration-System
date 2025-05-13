@@ -61,20 +61,20 @@ bool Banner::loadUsersData()
 
     string header;
     getline(file, header);
-    string skipHeadaer;
+    string skipHeader;
     for(int i=0; i<7; i++) {
-        file >> skipHeadaer;
-        qDebug() << skipHeadaer;
+        file >> skipHeader;
+        // qDebug() << skipHeader;
     }
 
     int row = 0;
     while (row != rowsCount) {
         userCourses.clear();
         file >> name >> username >> password >> role >> id;
-        qDebug() << name;
-        qDebug() << username;
-        qDebug() << password;
-        qDebug() << role;
+        // qDebug() << name;
+        // qDebug() << username;
+        // qDebug() << password;
+        // qDebug() << role;
         role = (UserRole) role;
         if (role != ADMIN){
             file >> coursesNum;
@@ -119,29 +119,114 @@ bool Banner::saveCoursesData()
     int rowsCount = courses.size();
     file << rowsCount << endl;
     // Header
-    file << "ID Name Department Credit_Hours Instructor_Username Time En_Students_Num En_Students_IDs Waiting_Students_Num Waiting_Students_IDs\n";
+    file << "ID Name Department Credit_Hours Capacity Instructor_Username Time En_Students_Num En_Students_Usernames Waiting_Students_Num Waiting_Students_Usernames\n";
 
-    for (auto& user: users) {
-        file << user.second->getName().toStdString() << " "
-             << user.second->getUsername().toStdString() << " "
-             << user.second->getPassword().toStdString() << " "
-             << user.second->getRole() << " "
-             << user.second->getID().toStdString() << " ";
-        vector<Course*> userCourses;
-        if (user.second->getRole() == STUDENT) {
-            userCourses = dynamic_cast<Student*>(user.second)->getCourses();
-        } else if (user.second->getRole() == INSTRUCTOR) {
-            userCourses = dynamic_cast<Instructor*>(user.second)->getCourses();
+    for (auto& course: courses) {
+        file << course.second->getCourseID().toStdString() << " "
+             << course.second->getCourseName().toStdString() << " "
+             << course.second->getDepartment().toStdString() << " "
+             << course.second->getCreditHours() << " "
+             << course.second->getCapacity() << " "
+             << course.second->getInstructor()->getUsername().toStdString() << " "
+             << course.second->getScheduleTime().toStdString() << " ";
+
+        file << course.second->getEnrolledStudents().size() << " ";
+        for (auto& student: course.second->getEnrolledStudents()) {
+            file << student->getUsername().toStdString() << " ";
         }
-        if (user.second->getRole() != ADMIN) {
-            file << userCourses.size() << " " ;
-            // for (auto& course: userCourses) {
-            // file << course.getID() << " ";
-            // }
+
+        file << course.second->getWaitingList().size() << " ";
+        for (auto& student: course.second->getWaitingList()) {
+            file << student->getUsername().toStdString() << " ";
         }
-        file << endl;
     }
+    file << endl;
     file.close();
+    return true;
+}
+
+bool Banner::loadCoursesData()
+{
+    QString empty = "";
+    string name, id, schedule, dep, instructorUsername;
+    unsigned int creditHours, capacity;
+    int enStudentsNum, waitingStudentsNum;
+    vector<Student*> enrolledStudents;
+    queue<Student*> waitingList;
+    Course *loadedCourse;
+
+    ifstream file("courses.txt");
+
+    if (!file.is_open()){
+        return false;
+    }
+
+    int rowsCount;
+    file >> rowsCount;
+    // qDebug() << rowsCount;
+
+    string header;
+    getline(file, header);
+    string skipHeader;
+    for(int i=0; i<11; i++) {
+        file >> skipHeader;
+        // qDebug() << skipHeader;
+    }
+
+    int row = 0;
+    while (row != rowsCount) {
+        enrolledStudents.clear();
+        waitingList = queue<Student*>();
+        file >> id >> name >> dep >> creditHours >> capacity >> instructorUsername >> schedule;
+        // qDebug() << name;
+        // qDebug() << username;
+        // qDebug() << password;
+        // qDebug() << role;
+
+        // Create a temporary instructor pointer (will be updated later)
+        Instructor* tempInstructor = new Instructor(empty, QString::fromStdString(instructorUsername), empty, empty, vector<Course*>());
+
+        // Create the course with temporary instructor
+        loadedCourse = new Course(
+            QString::fromStdString(id),
+            QString::fromStdString(name),
+            creditHours,
+            tempInstructor,
+            capacity,
+            QString::fromStdString(schedule),
+            QString::fromStdString(dep)
+            );
+
+        // Read enrolled students
+        file >> enStudentsNum;
+        for (int i = 0; i < enStudentsNum; ++i) {
+            string studentUsername;
+            file >> studentUsername;
+            // Create temporary student (will be updated later)
+            Student* tempStudent = new Student(empty, QString::fromStdString(studentUsername), empty, empty, vector<Course*>());
+            enrolledStudents.push_back(tempStudent);
+        }
+        loadedCourse->setEnrolledStudents(enrolledStudents);
+
+        // Read waiting list
+        file >> waitingStudentsNum;
+        for (int i = 0; i < waitingStudentsNum; ++i) {
+            string studentUsername;
+            file >> studentUsername;
+            // Create temporary student (will be updated later)
+            Student* tempStudent = new Student(empty, QString::fromStdString(studentUsername), empty, empty, vector<Course*>());
+            waitingList.push(tempStudent);
+        }
+        loadedCourse->setWaitingList(waitingList);
+
+        // Add course to the map
+        courses[QString::fromStdString(id)] = loadedCourse;
+        row++;
+    }
+
+    if(courses.empty()) {
+        return false;
+    }
     return true;
 }
 
@@ -249,7 +334,7 @@ bool Banner::updateUser(const QString &username, const QString &name, const QStr
     }
 }
 
-User *Banner::search(const QString &username)
+User *Banner::searchUser(const QString &username)
 {
     try {
         return users.at(username);
@@ -288,29 +373,102 @@ bool Banner::validatePassword(const QString &pass)
     return true;
 }
 
+bool Banner::createCourse(Course *course)
+{
+    if(courses[course->getCourseID()]) {
+        return false;
+    } else {
+        courses[course->getCourseID()] = course;
+        // Add the course to the instructor's assigned courses
+        Instructor* instructor = course->getInstructor();
+        if (instructor) {
+            instructor->addCourse(course);
+        }
+        return true;
+    }
+}
+
+map<QString, Course *> Banner::listCourses()
+{
+    return courses;
+}
+
 bool Banner::loadData()
 {
-    // if (loadCoursesData()){
-    if (loadUsersData()){
-        return true;
-    } else {
+    // First load courses without user references
+    if (!loadCoursesData()) {
         return false;
     }
-    // } else {
-    // return false;
-    // }
+
+    // Then load users with their course references
+    if (!loadUsersData()) {
+        return false;
+    }
+
+    // Finally, update course references with user data
+    if (!updateCourseReferences()) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Banner::updateCourseReferences()
+{
+    for (auto& course : courses) {
+        // Update instructor reference
+        QString instructorUsername = course.second->getInstructor()->getUsername();
+        try {
+            Instructor* instructor = dynamic_cast<Instructor*>(users.at(instructorUsername));
+            if (instructor) {
+                course.second->setInstructor(instructor);
+            }
+        } catch (const std::out_of_range&) {
+            qDebug() << "Missing instructor:" << instructorUsername;
+            return false;
+        }
+
+        // Update enrolled students references
+        vector<Student*> enrolledStudents;
+        for (auto& student : course.second->getEnrolledStudents()) {
+            QString studentUsername = student->getUsername();
+            try {
+                Student* s = dynamic_cast<Student*>(users.at(studentUsername));
+                if (s) {
+                    enrolledStudents.push_back(s);
+                }
+            } catch (const std::out_of_range&) {
+                qDebug() << "Missing enrolled student:" << studentUsername;
+                return false;
+            }
+        }
+        course.second->setEnrolledStudents(enrolledStudents);
+
+        // Update waiting list references
+        queue<Student*> waitingList;
+        for (auto& student : course.second->getWaitingList()) {
+            QString studentUsername = student->getUsername();
+            try {
+                Student* s = dynamic_cast<Student*>(users.at(studentUsername));
+                if (s) {
+                    waitingList.push(s);
+                }
+            } catch (const std::out_of_range&) {
+                qDebug() << "Missing waiting student:" << studentUsername;
+                return false;
+            }
+        }
+        course.second->setWaitingList(waitingList);
+    }
+    return true;
 }
 
 bool Banner::saveData()
 {
-    // if (saveCoursesData()){
-    if (saveUsersData()){
+    if (saveCoursesData() && saveUsersData()){
         qDebug() << "Saved Data Successfully!";
         return true;
     } else {
         return false;
     }
-    // } else {
-    // return false;
-    // }
 }

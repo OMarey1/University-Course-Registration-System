@@ -18,6 +18,7 @@ public:
     ~AdminDashboard();
     void setBanner(Banner* b);
     void fillUsersTable();
+    void fillCoursesTable();
 
 private slots:
     void on_logoutButton_clicked();
@@ -33,6 +34,8 @@ private slots:
     void onChildDialogClosed(int result);
 
     void on_addCourseButton_clicked();
+
+    void on_reloadCoursesButton_clicked();
 
 private:
     Ui::AdminDashboard *ui;

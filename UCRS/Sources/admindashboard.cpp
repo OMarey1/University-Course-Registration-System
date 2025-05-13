@@ -26,6 +26,7 @@ void AdminDashboard::setBanner(Banner *b)
     admin = dynamic_cast<Admin*>(banner->getCurrentUser());
     ui->welcomeLabel->setText("Welcome, " + admin->getName());
     fillUsersTable();
+    fillCoursesTable();
 }
 
 void AdminDashboard::on_logoutButton_clicked()
@@ -52,7 +53,7 @@ void AdminDashboard::fillUsersTable()
     ui->userTableWidget->setColumnCount(headers.size());
 
     const int rowCount = usersList.size();
-    qDebug() << rowCount;
+    // qDebug() << rowCount;
     ui->userTableWidget->setRowCount(usersList.size());
     int row = 0;
     for (const auto& u : usersList) {
@@ -81,6 +82,34 @@ void AdminDashboard::fillUsersTable()
         row++;
     }
     ui->userTableWidget->resizeColumnsToContents();
+}
+
+void AdminDashboard::fillCoursesTable()
+{
+    auto coursesList = banner->listCourses();
+
+    ui->courseTableWidget->clearContents();
+    ui->courseTableWidget->setRowCount(0);
+
+    const QStringList headers = {"ID", "Name", "Department", "Credit Hours", "Instructor", "Schedule", "Enrolled Students", "Waiting List"};
+    ui->courseTableWidget->setHorizontalHeaderLabels(headers);
+    ui->courseTableWidget->setColumnCount(headers.size());
+
+    ui->courseTableWidget->setRowCount(coursesList.size());
+    int row = 0;
+    for (const auto& c : coursesList) {
+        Course* course = c.second;
+        ui->courseTableWidget->setItem(row, 0, new QTableWidgetItem(course->getCourseID()));
+        ui->courseTableWidget->setItem(row, 1, new QTableWidgetItem(course->getCourseName()));
+        ui->courseTableWidget->setItem(row, 2, new QTableWidgetItem(course->getDepartment()));
+        ui->courseTableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(course->getCreditHours())));
+        ui->courseTableWidget->setItem(row, 4, new QTableWidgetItem(course->getInstructor()->getUsername()));
+        ui->courseTableWidget->setItem(row, 5, new QTableWidgetItem(course->getScheduleTime()));
+        ui->courseTableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(course->getEnrolledStudents().size())));
+        ui->courseTableWidget->setItem(row, 7, new QTableWidgetItem(QString::number(course->getWaitingList().size())));
+        row++;
+    }
+    ui->courseTableWidget->resizeColumnsToContents();
 }
 
 
@@ -120,9 +149,14 @@ void AdminDashboard::on_addCourseButton_clicked()
     cc->setModal(true);
     // connect the dialog’s finished() to your slot
     connect(cc, &QDialog::finished, this, &AdminDashboard::onChildDialogClosed);
-    // cc->setBanner(banner);
+    cc->setBanner(banner);
     cc->show();
     cc->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void AdminDashboard::on_reloadCoursesButton_clicked()
+{
+    fillCoursesTable();
 }
 
 void AdminDashboard::on_saveButton_clicked()
@@ -138,7 +172,6 @@ void AdminDashboard::onChildDialogClosed(int result)
     //     user clicked “Cancel” or closed the window
     // }
     fillUsersTable();
-    // fillCoursesTable();
+    fillCoursesTable();
 }
-
 

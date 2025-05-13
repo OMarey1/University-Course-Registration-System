@@ -18,7 +18,8 @@ private:
     bool saveUsersData();
     bool loadUsersData();
     bool saveCoursesData();
-    // bool loadCoursesData();
+    bool loadCoursesData();
+    bool updateCourseReferences();
 public:
     Banner();
     ~Banner();
@@ -28,13 +29,13 @@ public:
     bool addUser(User* user);
     int deleteUser(const QString& username);
     bool updateUser(const QString& username, const QString& name, const QString& pass, const QString& id);
-    User* search(const QString& username);
-    // vector<User*> listUsers();
+    User* searchUser(const QString& username);
     map<QString, User*> listUsers();
     bool validatePassword(const QString& pass);
     bool createCourse(Course* course);
     // bool deleteCourse (const QString& id);
     // Course searchCourse();
+    map<QString, Course*> listCourses();
     // bool generateReport();
     bool loadData();
     bool saveData();

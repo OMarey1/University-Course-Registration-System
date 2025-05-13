@@ -5,15 +5,15 @@
 
 using namespace std;
 
-Course::Course(const string& id, const string& name, unsigned int credits,
-               Instructor* instructor, unsigned int cap, const string& time,
-               const string& dept)
+Course::Course(const QString& id, const QString& name, unsigned int credits,
+               Instructor* instructor, unsigned int cap, const QString& time,
+               const QString& dept)
     : courseID(id), courseName(name), creditHours(credits), instructor(instructor),
     capacity(cap), scheduleTime(time), department(dept) {}
 
-string Course::getCourseID() const { return courseID; }
+QString Course::getCourseID() const { return courseID; }
 
-string Course::getCourseName() const { return courseName; }
+QString Course::getCourseName() const { return courseName; }
 
 unsigned int Course::getCreditHours() const { return creditHours; }
 
@@ -21,13 +21,36 @@ Instructor* Course::getInstructor() const { return instructor; }
 
 unsigned int Course::getCapacity() const { return capacity; }
 
-string Course::getScheduleTime() const { return scheduleTime; }
+QString Course::getScheduleTime() const { return scheduleTime; }
 
-string Course::getDepartment() const { return department; }
+QString Course::getDepartment() const { return department; }
 
 vector<Student*> Course::getEnrolledStudents() const { return enrolledStudents; }
 
-queue<Student*> Course::getWaitingList() const { return waitingList; }
+vector<Student*> Course::getWaitingList() const {
+    vector<Student*> waitingListVector;
+    waitingListVector.reserve(waitingList.size());
+
+    queue<Student*> temp = waitingList;
+    while (!temp.empty()) {
+        waitingListVector.push_back(temp.front());
+        temp.pop();
+    }
+    return waitingListVector;
+}
+
+void Course::setInstructor(Instructor* instr) {
+    instructor = instr;
+}
+
+void Course::setEnrolledStudents(const vector<Student*>& students) {
+    enrolledStudents = students;
+}
+
+void Course::setWaitingList(const queue<Student*>& waiting) {
+    waitingList = waiting;
+}
+
 
 bool Course::enrollStudent(Student* student) {
     // Check if already enrolled
@@ -54,9 +77,9 @@ bool Course::dropStudent(Student* student) {
     return false;
 }
 
-bool Course::checkScheduleConflict(const string& otherSchedule) const {
-    return scheduleTime == otherSchedule;
-}
+// bool Course::checkScheduleConflict(const QString& otherSchedule) const {
+//     return scheduleTime == otherSchedule;
+// }
 
 bool Course::isFull() const {
     return enrolledStudents.size() >= capacity;

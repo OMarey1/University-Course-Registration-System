@@ -2,6 +2,7 @@
 #include "ui_ccpage.h"
 #include "../Headers/course.h"
 #include "../Headers/messages.h"
+#include "../Headers/instructor.h"
 
 CCPage::CCPage(QWidget *parent)
     : QDialog(parent)
@@ -13,6 +14,18 @@ CCPage::CCPage(QWidget *parent)
 CCPage::~CCPage()
 {
     delete ui;
+}
+
+void CCPage::setBanner(Banner *b)
+{
+    banner = b;
+    // Add Instructors
+    auto users = banner->listUsers();
+    for (const auto& user : users) {
+        if (user.second->getRole() == INSTRUCTOR) {
+            ui->instructorComboBox->addItem(user.second->getUsername());
+        }
+    }
 }
 
 void CCPage::on_clearButton_clicked()
@@ -36,17 +49,21 @@ void CCPage::on_createCourseButton_clicked()
         return;
     }
 
-    Instructor* instructor = dynamic_cast<Instructor*>( banner->search(instructorUsername));
+    Instructor* instructor = dynamic_cast<Instructor*>(banner->searchUser(instructorUsername));
+    if (!instructor) {
+        showError(this, "Selected instructor not found!");
+        return;
+    }
 
     Course* newCourse = new Course(id,name,creditHours,instructor,capacity,schedule,dep);
 
-    // if (banner->addCourse(newUser)) {
-    //     showSuccess(this, "New course has been created!");
-    //     this->close();
-    // } else {
-    //     delete newUser;
-    //     showError(this, "Entered Course ID already exists!");
-    // }
+    if (banner->createCourse(newCourse)) {
+        showSuccess(this, "New course has been created!");
+        this->close();
+    } else {
+        delete newCourse;
+        showError(this, "Entered Course ID already exists!");
+    }
 
 }
 

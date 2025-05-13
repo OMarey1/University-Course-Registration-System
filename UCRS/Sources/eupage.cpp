@@ -42,7 +42,7 @@ void eupage::on_searchButton_clicked()
         showError(this, "You have to fill the username field");
         return;
     }
-    user = banner->search(username);
+    user = banner->searchUser(username);
     if(user){
         setEditState(true);
         ui->namelineEdit->setText(user->getName());

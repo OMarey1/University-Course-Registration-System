@@ -36,7 +36,12 @@ public:
     QString getScheduleTime() const;
     QString getDepartment() const;
     vector<Student*> getEnrolledStudents() const;
-    queue<Student*> getWaitingList() const;
+    vector<Student*> getWaitingList() const;
+
+    // Setters
+    void setInstructor(Instructor* instr);
+    void setEnrolledStudents(const vector<Student*>& students);
+    void setWaitingList(const queue<Student*>& waiting);
     
     // Course operations
     bool enrollStudent(Student* student);
