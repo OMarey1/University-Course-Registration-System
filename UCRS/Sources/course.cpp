@@ -47,6 +47,11 @@ vector<Student*> Course::getWaitingList() const {
     return waitingListVector;
 }
 
+queue<Student *> Course::getWaitingListQueue() const
+{
+    return waitingList;
+}
+
 void Course::setInstructor(Instructor* instr) {
     instructor = instr;
 }

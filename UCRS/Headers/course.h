@@ -39,6 +39,7 @@ public:
     QString getDepartment() const;
     vector<Student *> getEnrolledStudents() const;
     vector<Student *> getWaitingList() const;
+    queue<Student *> getWaitingListQueue() const;
     int getEnrolledStudentsNumber() const;
 
     // Setters

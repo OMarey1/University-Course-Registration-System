@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QTableWidgetItem>
 #include <algorithm>
+#include <queue>
 
 CRPage::CRPage(QWidget *parent) :
     QDialog(parent),
@@ -96,13 +97,48 @@ void CRPage::refreshAvailableCourses(const QString& filter)
         auto* instructorItem = new QTableWidgetItem(course->getInstructor() ?
                                                         course->getInstructor()->getName() : "Not Assigned");
 
-        // Set item flags and tooltips
+        // Set tooltips for full courses
         if (course->isFull()) {
-            idItem->setFlags(idItem->flags() & ~Qt::ItemIsEnabled);
-            idItem->setToolTip("Course full");
-            nameItem->setFlags(nameItem->flags() & ~Qt::ItemIsEnabled);
-            scheduleItem->setFlags(scheduleItem->flags() & ~Qt::ItemIsEnabled);
-            instructorItem->setFlags(instructorItem->flags() & ~Qt::ItemIsEnabled);
+            // Check if student is in waiting list
+            const auto& waitingList = course->getWaitingList();
+            bool inWaitingList = std::find(waitingList.begin(), waitingList.end(), m_currentStudent) != waitingList.end();
+
+            if (inWaitingList) {
+                // Calculate position in waiting list
+                int position = 0;
+                for (const auto& student : waitingList) {
+                    if (student == m_currentStudent) {
+                        break;
+                    }
+                    position++;
+                }
+
+                QString waitingListMsg = QString("Course full - You are in waiting list (Position: %1)").arg(position + 1);
+                idItem->setToolTip(waitingListMsg);
+                nameItem->setToolTip(waitingListMsg);
+                scheduleItem->setToolTip(waitingListMsg);
+                instructorItem->setToolTip(waitingListMsg);
+
+                // Set text color to indicate waiting list status
+                QColor waitingListColor(255, 165, 0); // Orange color for waiting list
+                idItem->setForeground(waitingListColor);
+                nameItem->setForeground(waitingListColor);
+                scheduleItem->setForeground(waitingListColor);
+                instructorItem->setForeground(waitingListColor);
+            } else {
+                QString fullMsg = "Course full - Click to join waiting list";
+                idItem->setToolTip(fullMsg);
+                nameItem->setToolTip(fullMsg);
+                scheduleItem->setToolTip(fullMsg);
+                instructorItem->setToolTip(fullMsg);
+
+                // Set text color to indicate full status
+                QColor fullColor(255, 0, 0); // Red color for full courses
+                idItem->setForeground(fullColor);
+                nameItem->setForeground(fullColor);
+                scheduleItem->setForeground(fullColor);
+                instructorItem->setForeground(fullColor);
+            }
         }
 
         // Set items in table
@@ -158,6 +194,13 @@ void CRPage::handleRegistration() {
         return;
     }
 
+    // Check if already in waiting list
+    const auto& waitingList = course->getWaitingList();
+    if (std::find(waitingList.begin(), waitingList.end(), m_currentStudent) != waitingList.end()) {
+        showError("You are already in the waiting list for this course.");
+        return;
+    }
+
     // Check schedule conflicts
     if (hasScheduleConflict(course)) {
         showError("Schedule conflict detected with your registered courses.");
@@ -177,9 +220,25 @@ void CRPage::handleRegistration() {
     // Attempt registration
     if (course->enrollStudent(m_currentStudent)) {
         m_currentStudent->registerCourse(course);
-        // showSuccess("Successfully registered for the course.");
+        showSuccess("Successfully registered for the course.");
     } else {
-        showSuccess("Course is full. You have been added to the waiting list.");
+        // Add to waiting list
+        queue<Student*> waitingList = course->getWaitingListQueue();
+        waitingList.push(m_currentStudent);
+        course->setWaitingList(waitingList);
+
+        // Calculate position in waiting list
+        int position = 0;
+        queue<Student*> tempQueue = waitingList;
+        while (!tempQueue.empty()) {
+            if (tempQueue.front() == m_currentStudent) {
+                break;
+            }
+            position++;
+            tempQueue.pop();
+        }
+
+        showSuccess(QString("Course is full. You have been added to the waiting list (Position: %1).").arg(position + 1));
     }
 
     refreshAvailableCourses();
