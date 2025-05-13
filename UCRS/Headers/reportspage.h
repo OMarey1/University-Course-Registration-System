@@ -28,6 +28,8 @@ private slots:
 
     void on_exportPushButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::ReportsPage *ui;
     Banner * banner;

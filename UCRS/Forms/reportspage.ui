@@ -143,6 +143,13 @@ QLabel:disabled, QRadioButton:disabled {
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="reportTypeGroupBox">
      <property name="title">
       <string>Select Report Type</string>

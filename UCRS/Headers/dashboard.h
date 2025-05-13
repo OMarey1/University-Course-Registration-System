@@ -19,11 +19,11 @@ public:
     void setBanner(Banner* b);
 
 private slots:
-    void on_manageCoursesButton_clicked();
-
     void on_reportsButton_clicked();
 
     void on_registerCoursesButton_clicked();
+
+    void on_signOutButton_clicked();
 
 private:
     Ui::Dashboard *ui;

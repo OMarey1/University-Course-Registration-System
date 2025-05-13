@@ -1,4 +1,5 @@
 #include "../Headers/reportspage.h"
+#include "Headers/dashboard.h"
 #include "ui_reportspage.h"
 #include "../Headers/user.h"
 #include "../Headers/student.h"
@@ -192,4 +193,12 @@ void ReportsPage::on_exportPushButton_clicked()
     }
     file.close();
     QMessageBox::information(this, "Export", "Report exported successfully to:\n"+generatedReport);
+}
+
+void ReportsPage::on_pushButton_clicked()
+{
+    Dashboard* d = new Dashboard(NULL);
+    d->setBanner(banner);
+    this->close();
+    d->show();
 }

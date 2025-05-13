@@ -8,6 +8,7 @@
 #include <QDialogButtonBox>
 #include <QSpinBox>
 #include <QComboBox>
+#include "../Headers/dashboard.h"
 
 CMPage::CMPage(QWidget *parent)
     : QDialog(parent)
@@ -193,3 +194,12 @@ void CMPage::on_coursesTable_itemSelectionChanged() {
         ui->enrolledStudentsTable->setItem(esRow, 1, new QTableWidgetItem(student->getID()));
     }
 }
+
+void CMPage::on_backPushButton_clicked()
+{
+    Dashboard* d = new Dashboard(NULL);
+    d->setBanner(banner);
+    this->close();
+    d->show();
+}
+

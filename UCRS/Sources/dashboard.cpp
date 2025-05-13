@@ -8,6 +8,7 @@
 #include"../Headers/crpage.h"
 #include "../Headers/user.h"
 #include "../Headers/instructor.h"
+#include "../Headers/loginpage.h"
 
 Dashboard::Dashboard(QWidget *parent)
     : QDialog(parent)
@@ -54,18 +55,9 @@ void Dashboard::setBanner(Banner *b)
     QString currentDate = QDate::currentDate().toString("dddd, MMMM d, yyyy");
     ui->dateTimeLabel->setText(currentDate);
 }
-void Dashboard::on_manageCoursesButton_clicked()
-{
-    CMPage* cm=new CMPage(this);
-    cm->setBanner(banner);
-    this -> close();
-    cm -> show();
-}
-
-
 void Dashboard::on_reportsButton_clicked()
 {
-    ReportsPage* r= new ReportsPage(this);
+    ReportsPage* r= new ReportsPage(NULL);
     r -> setBanner(banner);
     this -> close();
     r -> show();
@@ -74,9 +66,18 @@ void Dashboard::on_reportsButton_clicked()
 
 void Dashboard::on_registerCoursesButton_clicked()
 {
-    CRPage* cr = new CRPage(this);
+    CRPage* cr = new CRPage(NULL);
     cr->setBanner(banner);
     this -> close();
     cr -> show();
+}
+
+
+void Dashboard::on_signOutButton_clicked()
+{
+    LoginPage* l = new LoginPage(NULL);
+    l->setBanner(banner);
+    this->close();
+    l->show();
 }
 
