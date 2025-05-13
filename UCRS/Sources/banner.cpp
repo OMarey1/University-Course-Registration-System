@@ -2,6 +2,7 @@
 #include "../Headers/admin.h"
 #include "../Headers/student.h"
 #include "../Headers/instructor.h"
+#include <sstream>
 #include <fstream>
 #include <QDebug>
 
@@ -16,14 +17,14 @@ bool Banner::saveUsersData()
     int rowsCount = users.size();
     file << rowsCount << endl;
     // Header
-    file << "Name Username Password Role ID Courses_Number Courses_IDs\n";
+    file << "Name|Username|Password|Role|ID|Courses_Number|Courses_IDs\n";
 
     for (auto& user: users) {
-        file << user.second->getName().toStdString() << " "
-             << user.second->getUsername().toStdString() << " "
-             << user.second->getPassword().toStdString() << " "
-             << user.second->getRole() << " "
-             << user.second->getID().toStdString() << " ";
+        file << user.second->getName().toStdString() << "|"
+             << user.second->getUsername().toStdString() << "|"
+             << user.second->getPassword().toStdString() << "|"
+             << user.second->getRole() << "|"
+             << user.second->getID().toStdString() << "|";
         vector<Course*> userCourses;
         if (user.second->getRole() == STUDENT) {
             userCourses = dynamic_cast<Student*>(user.second)->getCourses();
@@ -31,10 +32,10 @@ bool Banner::saveUsersData()
             userCourses = dynamic_cast<Instructor*>(user.second)->getCourses();
         }
         if (user.second->getRole() != ADMIN) {
-            file << userCourses.size() << " " ;
-            // for (auto& course: userCourses) {
-            // file << course.getID() << " ";
-            // }
+            file << userCourses.size() << "|" ;
+            for (auto& course: userCourses) {
+            file << course->getCourseID().toStdString() << "|";
+            }
         }
         file << endl;
     }
@@ -44,7 +45,7 @@ bool Banner::saveUsersData()
 
 bool Banner::loadUsersData()
 {
-    string name, username, password, id;
+    string line, name, username, password, id;
     int role, coursesNum;
     vector<Course*> userCourses;
     User *loadedUser;
@@ -57,38 +58,39 @@ bool Banner::loadUsersData()
 
     int rowsCount;
     file >> rowsCount;
-    // qDebug() << rowsCount;
-
-    string header;
-    getline(file, header);
-    string skipHeader;
-    for(int i=0; i<7; i++) {
-        file >> skipHeader;
-        // qDebug() << skipHeader;
-    }
+    // Skip header line
+    getline(file, line);
+    getline(file, line);
 
     int row = 0;
-    while (row != rowsCount) {
+    while (row != rowsCount && getline(file, line)) {
         userCourses.clear();
-        file >> name >> username >> password >> role >> id;
-        // qDebug() << name;
-        // qDebug() << username;
-        // qDebug() << password;
-        // qDebug() << role;
+        stringstream ss(line);
+        string field;
+
+        getline(ss, name, '|');
+        getline(ss, username, '|');
+        getline(ss, password, '|');
+        getline(ss, field, '|');
+        role = stoi(field);
+        getline(ss, id, '|');
+
         role = (UserRole) role;
         if (role != ADMIN){
-            file >> coursesNum;
+            // Parse courses number
+            getline(ss, field, '|');
+            coursesNum = stoi(field);
             // Because of this I have to load the Courses from the file before loading the users
             for (int i = 0; i < coursesNum; ++i) {
                 string courseId;
-                file >> courseId;
+                getline(ss, courseId, '|');
+                qDebug() << courseId;
                 try {
                     userCourses.push_back(courses.at(QString::fromStdString(courseId)));
                 } catch (const std::out_of_range&) {
                     qDebug() << "Missing course:" << courseId;
-                    return false;
+                    // return false;
                 }
-
             }
             if (role == STUDENT) {
                 loadedUser = new Student(QString::fromStdString(name),QString::fromStdString(username),QString::fromStdString(password),QString::fromStdString(id), userCourses);
@@ -119,28 +121,28 @@ bool Banner::saveCoursesData()
     int rowsCount = courses.size();
     file << rowsCount << endl;
     // Header
-    file << "ID Name Department Credit_Hours Capacity Instructor_Username Time En_Students_Num En_Students_Usernames Waiting_Students_Num Waiting_Students_Usernames\n";
+    file << "ID|Name|Department|Credit_Hours|Capacity|Instructor_Username|Time|En_Students_Num|En_Students_Usernames|Waiting_Students_Num|Waiting_Students_Usernames\n";
 
     for (auto& course: courses) {
-        file << course.second->getCourseID().toStdString() << " "
-             << course.second->getCourseName().toStdString() << " "
-             << course.second->getDepartment().toStdString() << " "
-             << course.second->getCreditHours() << " "
-             << course.second->getCapacity() << " "
-             << course.second->getInstructor()->getUsername().toStdString() << " "
-             << course.second->getScheduleTime().toStdString() << " ";
+        file << course.second->getCourseID().toStdString() << "|"
+             << course.second->getCourseName().toStdString() << "|"
+             << course.second->getDepartment().toStdString() << "|"
+             << course.second->getCreditHours() << "|"
+             << course.second->getCapacity() << "|"
+             << course.second->getInstructor()->getUsername().toStdString() << "|"
+             << course.second->getScheduleTime().toStdString() << "|";
 
-        file << course.second->getEnrolledStudents().size() << " ";
+        file << course.second->getEnrolledStudents().size() << "|";
         for (auto& student: course.second->getEnrolledStudents()) {
-            file << student->getUsername().toStdString() << " ";
+            file << student->getUsername().toStdString() << "|";
         }
 
-        file << course.second->getWaitingList().size() << " ";
+        file << course.second->getWaitingList().size() << "|";
         for (auto& student: course.second->getWaitingList()) {
-            file << student->getUsername().toStdString() << " ";
+            file << student->getUsername().toStdString() << "|";
         }
+        file << endl;
     }
-    file << endl;
     file.close();
     return true;
 }
@@ -148,7 +150,7 @@ bool Banner::saveCoursesData()
 bool Banner::loadCoursesData()
 {
     QString empty = "";
-    string name, id, schedule, dep, instructorUsername;
+    string line, name, id, schedule, dep, instructorUsername;
     unsigned int creditHours, capacity;
     int enStudentsNum, waitingStudentsNum;
     vector<Student*> enrolledStudents;
@@ -163,25 +165,29 @@ bool Banner::loadCoursesData()
 
     int rowsCount;
     file >> rowsCount;
-    // qDebug() << rowsCount;
-
-    string header;
-    getline(file, header);
-    string skipHeader;
-    for(int i=0; i<11; i++) {
-        file >> skipHeader;
-        // qDebug() << skipHeader;
-    }
+    // Skip header line
+    getline(file, line);
+    getline(file, line);
 
     int row = 0;
-    while (row != rowsCount) {
+    while (row != rowsCount && getline(file, line)) {
         enrolledStudents.clear();
         waitingList = queue<Student*>();
-        file >> id >> name >> dep >> creditHours >> capacity >> instructorUsername >> schedule;
-        // qDebug() << name;
-        // qDebug() << username;
-        // qDebug() << password;
-        // qDebug() << role;
+
+        stringstream ss(line);
+        string field;
+
+        getline(ss, id, '|');
+        getline(ss, name, '|');
+        getline(ss, dep, '|');
+        // Parse credit hours
+        getline(ss, field, '|');
+        creditHours = stoi(field);
+        // Parse capacity
+        getline(ss, field, '|');
+        capacity = stoi(field);
+        getline(ss, instructorUsername, '|');
+        getline(ss, schedule, '|');
 
         // Create a temporary instructor pointer (will be updated later)
         Instructor* tempInstructor = new Instructor(empty, QString::fromStdString(instructorUsername), empty, empty, vector<Course*>());
@@ -198,10 +204,11 @@ bool Banner::loadCoursesData()
             );
 
         // Read enrolled students
-        file >> enStudentsNum;
+        getline(ss, field, '|');
+        enStudentsNum = stoi(field);
         for (int i = 0; i < enStudentsNum; ++i) {
             string studentUsername;
-            file >> studentUsername;
+            getline(ss, studentUsername, '|');
             // Create temporary student (will be updated later)
             Student* tempStudent = new Student(empty, QString::fromStdString(studentUsername), empty, empty, vector<Course*>());
             enrolledStudents.push_back(tempStudent);
@@ -209,10 +216,11 @@ bool Banner::loadCoursesData()
         loadedCourse->setEnrolledStudents(enrolledStudents);
 
         // Read waiting list
-        file >> waitingStudentsNum;
+        getline(ss, field, '|');
+        waitingStudentsNum = stoi(field);
         for (int i = 0; i < waitingStudentsNum; ++i) {
             string studentUsername;
-            file >> studentUsername;
+            getline(ss, studentUsername, '|');
             // Create temporary student (will be updated later)
             Student* tempStudent = new Student(empty, QString::fromStdString(studentUsername), empty, empty, vector<Course*>());
             waitingList.push(tempStudent);
