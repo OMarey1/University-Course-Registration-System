@@ -48,9 +48,35 @@ void CCPage::on_clearButton_clicked()
 }
 
 
+// void CCPage::on_createCourseButton_clicked()
+// {
+
+//     if (!isInputsFilled()){
+//         showError(this, "You have to fill all the inputs fields");
+//         return;
+//     }
+
+//     Instructor* instructor = dynamic_cast<Instructor*>(banner->searchUser(instructorUsername));
+//     if (!instructor) {
+//         showError(this, "Selected instructor not found!");
+//         return;
+//     }
+
+//     Course* newCourse = new Course(id,name,creditHours,instructor,capacity,schedule,dep);
+
+//     if (banner->createCourse(newCourse)) {
+//         showSuccess(this, "New course has been created!");
+//         this->close();
+//     } else {
+//         delete newCourse;
+//         showError(this, "Entered Course ID already exists!");
+//     }
+
+// }
+
+
 void CCPage::on_createCourseButton_clicked()
 {
-
     if (!isInputsFilled()){
         showError(this, "You have to fill all the inputs fields");
         return;
@@ -62,16 +88,32 @@ void CCPage::on_createCourseButton_clicked()
         return;
     }
 
-    Course* newCourse = new Course(id,name,creditHours,instructor,capacity,schedule,dep);
+    // Check for duplicate course ID
+    if (banner->searchCourse(id)) {
+        showError(this, "A course with this ID already exists!");
+        return;
+    }
+
+    // Check for schedule conflict for instructor
+    const auto& allCourses = banner->listCourses();
+    for (const auto& [_, course] : allCourses) {
+        if (course->getInstructor() == instructor &&
+            course->getScheduleTime() == schedule) {
+            showError(this, "Schedule conflict: The instructor is already assigned to a course at this time.");
+            return;
+        }
+    }
+
+    // All checks passed; create course
+    Course* newCourse = new Course(id, name, creditHours, instructor, capacity, schedule, dep);
 
     if (banner->createCourse(newCourse)) {
         showSuccess(this, "New course has been created!");
         this->close();
     } else {
         delete newCourse;
-        showError(this, "Entered Course ID already exists!");
+        showError(this, "Course creation failed due to an unknown error.");
     }
-
 }
 
 bool CCPage::isInputsFilled()
