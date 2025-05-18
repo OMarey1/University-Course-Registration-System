@@ -217,25 +217,17 @@ void CRPage::handleRegistration() {
         return;
     }
 
-    // Attempt registration
     if (course->enrollStudent(m_currentStudent)) {
         m_currentStudent->registerCourse(course);
         showSuccess("Successfully registered for the course.");
     } else {
-        // Add to waiting list
-        queue<Student*> waitingList = course->getWaitingListQueue();
-        waitingList.push(m_currentStudent);
-        course->setWaitingList(waitingList);
+        // Student was added to waiting list inside enrollStudent()
+        const auto& waitingList = course->getWaitingList();
 
-        // Calculate position in waiting list
         int position = 0;
-        queue<Student*> tempQueue = waitingList;
-        while (!tempQueue.empty()) {
-            if (tempQueue.front() == m_currentStudent) {
-                break;
-            }
-            position++;
-            tempQueue.pop();
+        for (Student* s : waitingList) {
+            if (s == m_currentStudent) break;
+            ++position;
         }
 
         showSuccess(QString("Course is full. You have been added to the waiting list (Position: %1).").arg(position + 1));
